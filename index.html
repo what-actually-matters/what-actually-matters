@@ -10,7 +10,7 @@
   <style>
     :root {
       --black: #0a0a0a;
-      --grey: #111111;
+      --grey: #141414;
       --grey-mid: #1a1a1a;
       --grey-light: #888888;
       --white: #f0f0f0;
@@ -65,16 +65,16 @@
     .section-label { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase; color: var(--orange); margin-bottom: 16px; }
     .section-title { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(36px,4.5vw,58px); font-weight: 900; line-height: 1.0; text-transform: uppercase; color: var(--white); margin-bottom: 60px; }
     .section-title em { color: var(--orange); font-style: normal; }
-    .divider { height: 1px; background: rgba(255,255,255,0.06); margin: 0 48px; }
+    .divider { height: 1px; background: rgba(232,101,10,0.25); margin: 0; }
 
     /* ABOUT */
-    #about { background: var(--grey); }
+    #about { background: var(--grey); border-top: 3px solid var(--orange); }
     .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
     .about-text p { font-size: 16px; font-weight: 300; color: var(--text); line-height: 1.9; margin-bottom: 24px; }
     .about-text p strong { color: var(--white); font-weight: 600; }
 
     /* CONSULTING */
-    #consulting { background: var(--black); position: relative; }
+    #consulting { background: var(--black); border-top: 3px solid rgba(232,101,10,0.4); position: relative; }
     #consulting::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(circle at 30% 50%, rgba(232,101,10,0.04) 0%, transparent 65%); pointer-events: none; }
     .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(232,101,10,0.2); margin-top: 60px; }
     .service-card { background: var(--grey); padding: 40px 32px; transition: background 0.2s; }
@@ -92,14 +92,14 @@
     .btn-white:hover { background: #ddd; }
 
     /* WAM5 */
-    #wam5 { background: var(--grey); }
+    #wam5 { background: var(--grey); border-top: 3px solid var(--orange); }
     .wam-intro { font-size: 17px; font-weight: 300; color: var(--text); line-height: 1.9; max-width: 700px; margin-bottom: 40px; }
     .wam-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; width: 100%; margin-top: 40px; }
     .wam-linkedin-cta { margin-top: 60px; padding: 48px; background: var(--grey-mid); text-align: center; }
     .wam-linkedin-cta p { font-size: 17px; color: var(--text); margin-bottom: 28px; }
 
     /* CONTACT */
-    #contact { background: var(--black); position: relative; }
+    #contact { background: var(--black); border-top: 3px solid rgba(232,101,10,0.4); position: relative; }
     #contact::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(circle, rgba(232,101,10,0.08) 0%, transparent 65%); pointer-events: none; }
     .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; margin-top: 60px; align-items: start; }
     .contact-text p { font-size: 16px; font-weight: 300; color: var(--text); line-height: 1.8; margin-bottom: 20px; }
