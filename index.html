@@ -129,32 +129,61 @@
 
     /* MOBILE */
     @media (max-width: 900px) {
-      nav { padding: 16px 24px; }
+      /* NAV */
+      nav { padding: 16px 20px; }
       .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: rgba(10,10,10,0.98); padding: 24px; gap: 20px; }
       .nav-links.open { display: flex; }
       .nav-toggle { display: flex; }
-      .hero { padding: 120px 24px 80px; }
-      section { padding: 60px 20px; }
+
+      /* HERO */
+      .hero { padding: 110px 20px 72px; }
+      .hero-brand { font-size: clamp(40px,10vw,72px); letter-spacing: 0.03em; }
+      .hero-quote-block { padding: 16px 20px; }
+
+      /* SECTIONS */
+      section { padding: 56px 20px; }
+      .section-title { margin-bottom: 32px; }
+
+      /* WAM5 PRINCIPLE PAGE */
       .wam5-intro-grid { grid-template-columns: 1fr; gap: 40px; }
-      .about-grid { grid-template-columns: 1fr; gap: 48px; }
-      .services-grid { grid-template-columns: 1fr; }
+      .wam5-numbers { gap: 10px; }
+      .wam5-num { width: 56px; height: 56px; font-size: 28px; }
+
+      /* WAM5 SERIES */
       .wam-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
-      .contact-grid { grid-template-columns: 1fr; gap: 40px; }
-      .contact-form { padding: 32px 20px; }
-      footer { padding: 24px 20px; flex-direction: column; text-align: center; }
+      .wam-linkedin-cta { padding: 32px 20px; }
+
+      /* WORK WITH ME — tier headers stack cleanly */
       .support-banner { padding: 32px 20px; flex-direction: column; }
       .support-banner-title { font-size: 22px; }
-      .wam-linkedin-cta { padding: 32px 20px; }
+
+      /* ABOUT */
+      #about .section-inner > div[style*="grid-template-columns:380px"],
+      #about > div > div[style*="grid-template-columns:380px"] { display: block !important; }
+      #about img { max-width: 100%; width: 100% !important; margin-bottom: 40px; }
+
+      /* CONTACT */
+      .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+      .contact-form { padding: 32px 20px; }
+
+      /* FOOTER */
+      footer { padding: 24px 20px; flex-direction: column; text-align: center; gap: 12px; }
     }
+
     @media (max-width: 480px) {
-      .wam-grid { grid-template-columns: 1fr; gap: 8px; }
-      .hero-brand { letter-spacing: 0.02em; }
-      section { padding: 48px 16px; }
-      .section-title { font-size: 32px; margin-bottom: 32px; }
-      .service-card { padding: 28px 20px; }
       nav { padding: 14px 16px; }
+      .hero { padding: 100px 16px 60px; }
+      .hero-brand { font-size: clamp(36px,9vw,56px); }
+      section { padding: 44px 16px; }
+      .section-title { font-size: 30px; }
+      .wam-grid { grid-template-columns: 1fr; gap: 8px; }
+      .wam5-num { width: 48px; height: 48px; font-size: 24px; }
       .wam5-numbers { gap: 8px; }
-      .wam5-num { width: 52px; height: 52px; font-size: 28px; }
+      .service-card { padding: 24px 16px; }
+      .hero-quote-block { padding: 14px 16px; }
+      .hero-quote-block p { font-size: 15px; }
+      .wam-linkedin-cta { padding: 28px 16px; }
+      .contact-form { padding: 24px 16px; }
     }
   </style>
 </head>
@@ -270,12 +299,12 @@
 
     <!-- TIER 1 -->
     <div style="margin-bottom:2px;">
-      <div style="background:var(--orange);padding:16px 32px;display:flex;align-items:center;gap:16px;">
+      <div style="background:var(--orange);padding:16px 32px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
         <div style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.25em;text-transform:uppercase;color:rgba(255,255,255,0.7);">Tier 1</div>
         <div style="font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:900;text-transform:uppercase;color:var(--white);letter-spacing:0.05em;">Talks &amp; Workshops</div>
         <div style="font-size:13px;color:rgba(255,255,255,0.75);font-weight:300;margin-left:auto;">The entry point — WAM 5 in your room</div>
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(232,101,10,0.2);">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1px;background:rgba(232,101,10,0.2);">
         <div class="service-card">
           <div class="service-num">01</div>
           <div class="service-title">WAM 5 Keynote</div>
@@ -300,12 +329,12 @@
 
     <!-- TIER 2 -->
     <div style="margin-bottom:2px;">
-      <div style="background:var(--grey-mid);padding:16px 32px;display:flex;align-items:center;gap:16px;border-top:2px solid rgba(232,101,10,0.3);">
+      <div style="background:var(--grey-mid);padding:16px 32px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;border-top:2px solid rgba(232,101,10,0.3);">
         <div style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.25em;text-transform:uppercase;color:var(--orange);">Tier 2</div>
         <div style="font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:900;text-transform:uppercase;color:var(--white);letter-spacing:0.05em;">Operational Support</div>
         <div style="font-size:13px;color:var(--grey-light);font-weight:300;margin-left:auto;">Deeper engagement — applying it on the ground</div>
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:rgba(232,101,10,0.2);">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1px;background:rgba(232,101,10,0.2);">
         <div class="service-card">
           <div class="service-num">03</div>
           <div class="service-title">Guest Journey &amp; Experience Audits</div>
@@ -341,12 +370,12 @@
 
     <!-- TIER 3 -->
     <div style="margin-bottom:1px;">
-      <div style="background:var(--grey-mid);padding:16px 32px;display:flex;align-items:center;gap:16px;border-top:2px solid rgba(232,101,10,0.3);">
+      <div style="background:var(--grey-mid);padding:16px 32px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;border-top:2px solid rgba(232,101,10,0.3);">
         <div style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.25em;text-transform:uppercase;color:var(--orange);">Tier 3</div>
         <div style="font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:900;text-transform:uppercase;color:var(--white);letter-spacing:0.05em;">Strategic Advisory</div>
         <div style="font-size:13px;color:var(--grey-light);font-weight:300;margin-left:auto;">Board level — setting the right direction</div>
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(232,101,10,0.2);">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1px;background:rgba(232,101,10,0.2);">
         <div class="service-card">
           <div class="service-num">06</div>
           <div class="service-title">Organisational Strategy &amp; Transformation</div>
