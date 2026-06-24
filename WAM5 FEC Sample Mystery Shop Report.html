@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Sample Mystery Shop Report | WAM 5</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500;600&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --orange: #e8650a; --black: #111111; --dark: #1a1a1a; --white: #ffffff;
+    --off: #f6f6f6; --grey: #888888; --light: #444444;
+    --good: #2e8b57; --mid: #d4a017; --poor: #c0392b;
+  }
+  body { font-family: 'Barlow', sans-serif; background: var(--white); color: var(--dark); width: 210mm; margin: 0 auto; font-size: 9pt; line-height: 1.5; }
+  .page { page-break-after: always; min-height: 297mm; position: relative; }
+  .page:last-child { page-break-after: auto; }
+  .orange-rule { width: 100%; height: 3px; background: var(--orange); display: block; }
+  .sample-badge { position: absolute; top: 6mm; right: 12mm; z-index: 10; background: var(--dark); color: var(--white); font-family: 'Barlow Condensed', sans-serif; font-size: 7pt; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 1.5mm 4mm; border-radius: 1mm; border: 1px solid var(--orange); }
+
+  .header-css { width: 100%; height: 40mm; background: #0d1117; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+  .header-diagonal { position: absolute; right: -20mm; bottom: -5mm; width: 120mm; height: 60mm; background: rgba(255,255,255,0.04); transform: rotate(-15deg); border-radius: 2mm; }
+  .header-diagonal-2 { position: absolute; right: 10mm; bottom: -10mm; width: 80mm; height: 60mm; background: rgba(255,255,255,0.03); transform: rotate(-15deg); border-radius: 2mm; }
+  .header-content { text-align: center; position: relative; z-index: 2; }
+  .header-intro { font-family: 'Barlow Condensed', sans-serif; font-size: 8pt; font-weight: 600; letter-spacing: 0.3em; color: var(--orange); margin-bottom: 2mm; }
+  .header-main { font-family: 'Barlow Condensed', sans-serif; font-size: 30pt; font-weight: 900; color: var(--white); text-transform: uppercase; letter-spacing: -0.01em; line-height: 1; margin-bottom: 2mm; }
+  .header-main span { color: var(--orange); }
+  .header-tag { font-family: 'Barlow Condensed', sans-serif; font-size: 8.5pt; font-weight: 600; letter-spacing: 0.2em; color: #e0e0e0; }
+
+  .cover-body { padding: 18mm 18mm 0; text-align: center; }
+  .cover-eyebrow { font-family: 'Barlow Condensed', sans-serif; font-size: 9pt; font-weight: 700; letter-spacing: 0.2em; color: var(--orange); text-transform: uppercase; margin-bottom: 4mm; }
+  .cover-title { font-family: 'Barlow Condensed', sans-serif; font-size: 24pt; font-weight: 900; color: var(--dark); text-transform: uppercase; line-height: 1.05; margin-bottom: 7mm; }
+  .cover-meta-box { background: var(--off); border-left: 3px solid var(--orange); padding: 6mm 8mm; margin: 0 auto 8mm; max-width: 130mm; text-align: left; }
+  .cover-meta-row { display: flex; justify-content: space-between; padding: 1.5mm 0; border-bottom: 1px solid #e0e0e0; font-size: 8.5pt; }
+  .cover-meta-row:last-child { border-bottom: none; }
+  .cover-meta-label { color: var(--grey); font-weight: 600; }
+  .cover-meta-value { color: var(--dark); font-weight: 700; }
+  .cover-disclaimer { background: var(--dark); color: #cccccc; font-size: 7.3pt; line-height: 1.5; padding: 4.5mm 10mm; margin: 0 auto 7mm; max-width: 140mm; border-radius: 1mm; }
+  .cover-disclaimer strong { color: var(--orange); }
+  .cover-contents { max-width: 130mm; margin: 0 auto; text-align: left; }
+  .cover-contents-title { font-family: 'Barlow Condensed', sans-serif; font-size: 8.5pt; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--grey); margin-bottom: 2.5mm; }
+  .cover-contents-item { display: flex; justify-content: space-between; font-size: 8pt; padding: 1mm 0; color: var(--light); }
+  .cover-footer { position: absolute; bottom: 8mm; left: 0; right: 0; text-align: center; font-size: 8pt; color: var(--grey); }
+  .cover-footer strong { color: var(--dark); }
+
+  .page-content { padding: 14mm 14mm 18mm; }
+  .section-eyebrow { font-family: 'Barlow Condensed', sans-serif; font-size: 7.5pt; font-weight: 700; letter-spacing: 0.18em; color: var(--orange); text-transform: uppercase; margin-bottom: 1.5mm; }
+  .section-title { font-family: 'Barlow Condensed', sans-serif; font-size: 15pt; font-weight: 800; color: var(--dark); text-transform: uppercase; margin-bottom: 3mm; }
+
+  .method-box { background: var(--off); padding: 3.5mm 6mm; margin-bottom: 3.5mm; border-radius: 1mm; font-size: 7.6pt; color: var(--light); line-height: 1.45; }
+  .method-box strong { color: var(--dark); }
+
+  .score-hero { display: flex; align-items: center; gap: 6mm; background: var(--off); padding: 3.5mm; margin-bottom: 3.5mm; border-radius: 1mm; }
+  .score-circle { width: 24mm; height: 24mm; border-radius: 50%; background: var(--dark); display: flex; flex-direction: column; align-items: center; justify-content: center; flex-shrink: 0; }
+  .score-circle .num { font-family: 'Barlow Condensed', sans-serif; font-size: 17pt; font-weight: 900; color: var(--orange); line-height: 1; }
+  .score-circle .denom { font-size: 5.5pt; color: #999999; margin-top: 1mm; }
+  .score-summary-text { font-size: 8pt; color: var(--light); line-height: 1.5; }
+  .score-summary-text strong { color: var(--dark); }
+
+  .score-table { width: 100%; border-collapse: collapse; }
+  .score-table th { text-align: left; font-family: 'Barlow Condensed', sans-serif; font-size: 7pt; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--grey); padding: 1mm 2mm; border-bottom: 2px solid var(--dark); }
+  .score-table td { padding: 1.1mm 2mm; border-bottom: 1px solid #e8e8e8; font-size: 7.5pt; }
+  .score-bar-bg { width: 100%; height: 3.5px; background: #e0e0e0; border-radius: 3px; overflow: hidden; }
+  .score-bar-fill { height: 100%; border-radius: 3px; }
+  .score-tag { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 6.3pt; padding: 0.7mm 1.8mm; border-radius: 1mm; color: white; display: inline-block; white-space: nowrap; }
+
+  .tp-head { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3.5mm; border-bottom: 3px solid var(--orange); padding-bottom: 2.5mm; }
+  .tp-num-title { display: flex; align-items: baseline; gap: 3mm; }
+  .tp-num { font-family: 'Barlow Condensed', sans-serif; font-size: 24pt; font-weight: 900; color: var(--orange); opacity: 0.25; line-height: 1; }
+  .tp-title { font-family: 'Barlow Condensed', sans-serif; font-size: 15.5pt; font-weight: 800; color: var(--dark); text-transform: uppercase; line-height: 1; }
+  .tp-overall-score { text-align: right; }
+  .tp-overall-score .val { font-family: 'Barlow Condensed', sans-serif; font-size: 18pt; font-weight: 900; line-height: 1; }
+  .tp-overall-score .lbl { font-size: 6.3pt; color: var(--grey); letter-spacing: 0.1em; text-transform: uppercase; }
+
+  .key-info { background: var(--off); padding: 3mm 4mm; margin-bottom: 4mm; display: grid; grid-template-columns: repeat(4, 1fr); gap: 2mm 4mm; border-radius: 1mm; }
+  .key-info .ki-item .ki-lbl { font-size: 6.3pt; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--grey); }
+  .key-info .ki-item .ki-val { font-size: 7.6pt; color: var(--dark); font-weight: 600; margin-top: 0.5mm; }
+
+  .crit-table { width: 100%; border-collapse: collapse; margin-bottom: 4mm; }
+  .crit-table th { text-align: left; font-family: 'Barlow Condensed', sans-serif; font-size: 6.3pt; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--grey); padding: 1mm 2mm; border-bottom: 1.5px solid var(--dark); }
+  .crit-table td { padding: 1.4mm 2mm; border-bottom: 1px solid #ececec; font-size: 7.3pt; vertical-align: top; }
+
+  /* Appendix tables carry far more rows (up to 33), so they need tighter spacing to stay on one page */
+  .appendix-crit-table th { padding: 0.6mm 2mm; }
+  .appendix-crit-table td { padding: 0.7mm 2mm; font-size: 6.8pt; line-height: 1.25; }
+  .crit-score { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 8.3pt; white-space: nowrap; }
+
+  .narrative-body { font-size: 7.8pt; color: var(--light); line-height: 1.55; margin-bottom: 2.5mm; }
+  .narrative-body strong { color: var(--dark); }
+
+  .impact-callout { background: var(--off); border-left: 3px solid var(--orange); padding: 3mm 5mm; margin-top: 3mm; font-size: 7.5pt; color: var(--light); line-height: 1.5; }
+  .impact-callout strong { color: var(--orange); }
+
+  .wam5-header-band { background: var(--dark); padding: 9mm 14mm; text-align: center; }
+  .wam5-band-label { font-family: 'Barlow Condensed', sans-serif; font-size: 26pt; font-weight: 900; color: var(--white); letter-spacing: -0.01em; }
+  .wam5-band-label span { color: var(--orange); }
+  .wam5-band-sub { font-size: 8pt; color: #cccccc; margin-top: 2mm; max-width: 130mm; margin-left: auto; margin-right: auto; }
+
+  .priority-head { display: flex; align-items: baseline; gap: 4mm; margin-bottom: 3.5mm; border-bottom: 3px solid var(--orange); padding-bottom: 2.5mm; }
+  .priority-num { font-family: 'Barlow Condensed', sans-serif; font-size: 22pt; font-weight: 900; color: var(--orange); line-height: 1; }
+  .priority-title { font-family: 'Barlow Condensed', sans-serif; font-size: 13pt; font-weight: 800; color: var(--dark); text-transform: uppercase; line-height: 1.1; }
+  .priority-sub { font-family: 'Barlow Condensed', sans-serif; font-size: 7.3pt; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--orange); margin-bottom: 1.3mm; margin-top: 3mm; }
+  .priority-body { font-size: 7.8pt; color: var(--light); line-height: 1.5; }
+  .priority-body strong { color: var(--dark); }
+  .priority-list { margin: 1.3mm 0 0 0; padding-left: 4mm; }
+  .priority-list li { font-size: 7.8pt; color: var(--light); line-height: 1.5; margin-bottom: 1mm; }
+  .priority-list li strong { color: var(--dark); }
+  .priority-meta-row { display: flex; gap: 5mm; margin-top: 3mm; padding-top: 2.5mm; border-top: 1px solid #e8e8e8; }
+  .priority-meta { flex: 1; }
+  .priority-meta .lbl { font-size: 6.3pt; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--grey); }
+  .priority-meta .val { font-size: 8pt; color: var(--dark); font-weight: 700; margin-top: 0.6mm; }
+
+  .closing-box { background: var(--off); border-left: 3px solid var(--orange); padding: 4mm 6mm; margin-top: 5mm; font-size: 7.8pt; color: var(--light); line-height: 1.5; }
+  .closing-box strong { color: var(--dark); }
+
+  .category-badges { display: flex; gap: 3mm; margin-bottom: 3.5mm; flex-wrap: wrap; }
+  .cat-badge { flex: 1; background: var(--off); border-top: 3px solid var(--orange); padding: 2.3mm 4mm; min-width: 38mm; }
+  .cat-badge .cat-name { font-family: 'Barlow Condensed', sans-serif; font-size: 7.5pt; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--grey); }
+  .cat-badge .cat-pct { font-family: 'Barlow Condensed', sans-serif; font-size: 18pt; font-weight: 900; line-height: 1.1; margin-top: 1mm; }
+  .cat-badge .cat-note { font-size: 6.5pt; color: var(--grey); margin-top: 1mm; }
+
+  .tracker-q { margin-bottom: 5mm; }
+  .tracker-q-label { font-family: 'Barlow Condensed', sans-serif; font-size: 9pt; font-weight: 800; color: var(--dark); text-transform: uppercase; margin-bottom: 1.5mm; }
+  .tracker-q-body { font-size: 8.3pt; color: var(--light); line-height: 1.55; }
+  .nps-row { display: flex; align-items: center; gap: 5mm; margin-bottom: 2mm; }
+  .nps-score { font-family: 'Barlow Condensed', sans-serif; font-size: 26pt; font-weight: 900; color: var(--orange); line-height: 1; }
+  .nps-scale { display: flex; gap: 1mm; }
+  .nps-dot { width: 5mm; height: 5mm; border-radius: 1mm; background: #e0e0e0; }
+  .nps-dot.filled { background: var(--orange); }
+
+  .staff-spotlight { background: var(--off); border-left: 3px solid var(--orange); padding: 3mm 5mm; margin-bottom: 2.5mm; }
+  .staff-spotlight-name { font-family: 'Barlow Condensed', sans-serif; font-size: 9.5pt; font-weight: 800; color: var(--dark); }
+  .staff-spotlight-role { font-size: 7.5pt; font-weight: 400; color: var(--grey); text-transform: none; letter-spacing: normal; }
+  .staff-spotlight-note { font-size: 8pt; color: var(--light); line-height: 1.5; margin-top: 1mm; }
+
+  .wam5-glance-header { margin: 6mm 0 4mm; padding-top: 4mm; border-top: 2px solid var(--dark); }
+  .wam5-glance-title { font-family: 'Barlow Condensed', sans-serif; font-size: 15pt; font-weight: 900; color: var(--dark); letter-spacing: 0.02em; }
+  .wam5-glance-sub { font-size: 7.8pt; color: var(--grey); margin-top: 1.5mm; }
+  .wam5-glance-item { display: flex; gap: 4mm; padding: 3mm 0; border-bottom: 1px solid #ececec; align-items: flex-start; }
+  .wam5-glance-item:last-child { border-bottom: none; }
+  .wam5-glance-num { font-family: 'Barlow Condensed', sans-serif; font-size: 17pt; font-weight: 900; color: var(--orange); opacity: 0.5; line-height: 1.2; flex-shrink: 0; width: 11mm; }
+  .wam5-glance-body { font-size: 8.3pt; color: var(--light); line-height: 1.5; }
+  .wam5-glance-body strong { color: var(--dark); }
+
+  .gauge-wrap { width: 58mm; flex-shrink: 0; text-align: center; }
+  .gauge-svg { width: 100%; height: auto; display: block; }
+  .gauge-number { font-family: 'Barlow Condensed', sans-serif; font-size: 28pt; font-weight: 900; color: var(--dark); line-height: 1; margin-top: 1mm; }
+  .gauge-label { font-size: 7pt; color: var(--grey); letter-spacing: 0.05em; margin-top: 1mm; }
+
+  .export-btn-wrap { position: sticky; top: 0; z-index: 999; background: var(--dark); padding: 10px 24px; display: flex; justify-content: flex-end; }
+  .export-btn { background: var(--orange); color: white; border: none; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; padding: 9px 22px; border-radius: 2px; cursor: pointer; display: flex; align-items: center; gap: 8px; }
+  .export-btn:hover { background: #ff7820; }
+
+  @media screen {
+    body { background: #d8d8d8; padding: 24px 0; }
+    .page { box-shadow: 0 4px 18px rgba(0,0,0,0.22); margin-bottom: 24px; border: 1px solid #bbbbbb; }
+  }
+  @media print {
+    .export-btn-wrap { display: none !important; }
+    body { background: white; padding: 0; }
+    .page { box-shadow: none; margin-bottom: 0; border: none; }
+  }
+
+  .doc-footer { position: absolute; bottom: 7mm; left: 14mm; right: 14mm; display: flex; justify-content: space-between; font-size: 7pt; color: var(--grey); border-top: 1px solid #e0e0e0; padding-top: 2.5mm; }
+
+  /* Category appendix pages are hidden until the reader clicks a category badge to reveal them */
+  .page[id^="cat-"] { display: none; }
+  .page[id^="cat-"].revealed { display: block; }
+
+  /* Single-page export: hides every page except the one being printed */
+  @media print {
+    body.print-isolate .page:not(.print-target) { display: none !important; }
+    /* Main document export: always excludes appendix pages, even if currently revealed on screen */
+    body.print-main-only .page[id^="cat-"] { display: none !important; }
+  }
+  .doc-footer .brand { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; color: var(--dark); }
+
+  @media print { body { width: 210mm; margin: 0; } @page { size: 210mm 297mm; margin: 0mm; } .page { page-break-after: always; } }
+</style>
+</head>
+<body>
+
+<div class="export-btn-wrap">
+  <button class="export-btn" onclick="exportMainDocument()">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="15" height="15" fill="white"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+    Export to PDF
+  </button>
+</div>
+
+<script>
+function exportMainDocument() {
+  document.body.classList.add('print-main-only');
+  window.print();
+  setTimeout(function() {
+    document.body.classList.remove('print-main-only');
+  }, 1000);
+}
+
+function exportSinglePage(pageId) {
+  document.body.classList.add('print-isolate');
+  document.getElementById(pageId).classList.add('print-target');
+  window.print();
+  setTimeout(function() {
+    document.body.classList.remove('print-isolate');
+    document.getElementById(pageId).classList.remove('print-target');
+  }, 1000);
+}
+</script>
+
+<div class="page">
+  <div class="sample-badge">SAMPLE REPORT</div>
+  <div class="header-css">
+    <div class="header-diagonal"></div><div class="header-diagonal-2"></div>
+    <div class="header-content">
+      <div class="header-intro">I N T R O D U C I N G</div>
+      <div class="header-main">WHAT <span>ACTUALLY</span> MATTERS</div>
+      <div class="header-tag">FOCUS &nbsp;·&nbsp; DISCIPLINE &nbsp;·&nbsp; EXECUTION</div>
+    </div>
+  </div>
+  <span class="orange-rule"></span>
+  <div class="cover-body">
+    <div class="cover-eyebrow">Guest Experience Mystery Shop</div>
+    <div class="cover-title">Evaluation Report</div>
+    <div class="cover-meta-box">
+      <div class="cover-meta-row"><span class="cover-meta-label">Venue</span><span class="cover-meta-value">Family Entertainment Centre</span></div>
+      <div class="cover-meta-row"><span class="cover-meta-label">Location</span><span class="cover-meta-value">Dubai, UAE</span></div>
+      <div class="cover-meta-row"><span class="cover-meta-label">Visit Type</span><span class="cover-meta-value">Birthday Booking Call + Visit</span></div>
+      <div class="cover-meta-row"><span class="cover-meta-label">Evaluator</span><span class="cover-meta-value">Mark Tucker, WAM 5</span></div>
+      <div class="cover-meta-row"><span class="cover-meta-label">Overall Score</span><span class="cover-meta-value" style="color:#e8650a;">70 / 100</span></div>
+    </div>
+    <div class="cover-disclaimer">
+      <strong>This is a sample report.</strong> The venue, findings and scores shown here are illustrative and fictional, created to demonstrate the depth, structure and methodology of a genuine WAM 5 Guest Experience Mystery Shop, covering everything from the first phone call to departure. A real evaluation reflects exactly what was observed for your business, by Mark Tucker personally.
+    </div>
+    <div class="cover-contents">
+      <div class="cover-contents-title">Contents</div>
+      <div class="cover-contents-item"><span>Executive Summary, Category Scores &amp; Touchpoint Breakdown</span><span>Page 2</span></div>
+      <div class="cover-contents-item"><span>The WAM 5: At A Glance</span><span>Page 3</span></div>
+      <div class="cover-contents-item"><span>Detailed Findings: Ten Touchpoints</span><span>Pages 4–13</span></div>
+      <div class="cover-contents-item"><span>The WAM 5: Detailed Priorities</span><span>Pages 14–18</span></div>
+      <div class="cover-contents-item"><span>Customer Service Tracker</span><span>Page 19</span></div>
+    </div>
+  </div>
+  <div class="cover-footer">Prepared by <strong>Mark Tucker</strong> &nbsp;·&nbsp; WAM 5 &nbsp;·&nbsp; what-actually-matters.com</div>
+</div>
+
+<div class="page">
+  <div class="sample-badge">SAMPLE REPORT</div>
+  <div class="page-content" style="padding-top:12mm;" id="exec-summary">
+    <div class="section-eyebrow">Executive Summary</div>
+    <div class="section-title">Overall Findings</div>
+
+    <div class="score-hero">
+      <div class="gauge-wrap">
+        <svg viewBox="0 0 200 112" class="gauge-svg">
+          <path d="M 20.0 105.0 A 80 80 0 0 1 100.0 25.0" stroke="#c0392b" stroke-width="16" fill="none" stroke-linecap="round"/>
+          <path d="M 100.0 25.0 A 80 80 0 0 1 156.6 48.4" stroke="#d4a017" stroke-width="16" fill="none" stroke-linecap="round"/>
+          <path d="M 156.6 48.4 A 80 80 0 0 1 176.1 80.3" stroke="#2e8b57" stroke-width="16" fill="none" stroke-linecap="round"/>
+          <path d="M 176.1 80.3 A 80 80 0 0 1 180.0 105.0" stroke="#e8650a" stroke-width="16" fill="none" stroke-linecap="round"/>
+          <line x1="100" y1="105" x2="140" y2="50" stroke="#1a1a1a" stroke-width="4" stroke-linecap="round"/>
+          <circle cx="100" cy="105" r="7" fill="#1a1a1a"/>
+        </svg>
+        <div class="gauge-number">70</div>
+        <div class="gauge-label">OUT OF 100 &nbsp;·&nbsp; <span style="color:#d4a017;font-weight:700;">NEEDS WORK</span></div>
+      </div>
+      <div class="score-summary-text">
+        The guest journey was assessed from <strong>the very first phone call</strong> through to departure. Ten touchpoints in total, including the party itself. The business handles bookings, arrival and the party room genuinely well, and is exceptionally strong on safety. The clearest gap by far is <strong>commercial opportunity left untaken at every stage of the journey</strong>, repeated again in front of seven other families during the party, alongside queue management on site.
+      </div>
+    </div>
+
+    <div class="category-badges">
+      <a href="#cat-a" onclick="document.getElementById('cat-a').classList.add('revealed')" style="text-decoration:none;flex:1;"><div class="cat-badge"><div class="cat-name">Attitude &rarr;</div><div class="cat-pct" style="color:#d4a017;">72.1%</div><div class="cat-note">Staff warmth, engagement, eye contact, recovery</div></div></a>
+      <a href="#cat-f" onclick="document.getElementById('cat-f').classList.add('revealed')" style="text-decoration:none;flex:1;"><div class="cat-badge"><div class="cat-name">Facility &rarr;</div><div class="cat-pct" style="color:#2e8b57;">75.5%</div><div class="cat-note">Presentation, cleanliness, signage, equipment</div></div></a>
+      <a href="#cat-p" onclick="document.getElementById('cat-p').classList.add('revealed')" style="text-decoration:none;flex:1;"><div class="cat-badge"><div class="cat-name">Process &rarr;</div><div class="cat-pct" style="color:#2e8b57;">76.7%</div><div class="cat-note">Speed, accuracy, systems, compliance procedure</div></div></a>
+      <a href="#cat-s" onclick="document.getElementById('cat-s').classList.add('revealed')" style="text-decoration:none;flex:1;"><div class="cat-badge"><div class="cat-name">Sales &rarr;</div><div class="cat-pct" style="color:#c0392b;">14.3%</div><div class="cat-note">Upsell attempts, commercial opportunity taken</div></div></a>
+    </div>
+    <div class="method-box" style="margin-top:0; margin-bottom:5mm;">
+      <strong>How these are built.</strong> Every individual criterion scored across all ten touchpoints is tagged into one of these four categories. The percentage is the average of every criterion in that category, regardless of which touchpoint it came from. <strong>Sales sits dramatically below the other three</strong>, not because anything was done badly, but because the commercial opportunity was simply not taken, at the booking call, in the confirmation, and in front of seven other families during the party itself.
+    </div>
+
+    <table class="score-table">
+      <tr><th>Touchpoint</th><th>Score</th><th style="width:26%;">Performance</th><th>Rating</th></tr>
+      <tr><td>01 &nbsp; Reservation Call</td><td><strong>7.8</strong>/10</td><td><div class="score-bar-bg"><div class="score-bar-fill" style="width:78%;background:#2e8b57;"></div></div></td><td><span class="score-tag" style="background:#2e8b57;">STRONG</span></td></tr>
+      <tr><td>02 &nbsp; Booking Confirmation</td><td><strong>7.0</strong>/10</td><td><div class="score-bar-bg"><div class="score-bar-fill" style="width:70%;background:#d4a017;"></div></div></td><td><span class="score-tag" style="background:#d4a017;">NEEDS WORK</span></td></tr>
+      <tr><td>03 &nbsp; Arrival &amp; First Impressions</td><td><strong>8.3</strong>/10</td><td><div class="score-bar-bg"><div class="score-bar-fill" style="width:83%;background:#2e8b57;"></div></div></td><td><span class="score-tag" style="background:#2e8b57;">STRONG</span></td></tr>
+      <tr><td>04 &nbsp; Welcome &amp; Staff Engagement</td><td><strong>7.3</strong>/10</td><td><div class="score-bar-bg"><div class="score-bar-fill" style="width:73%;background:#d4a017;"></div></div></td><td><span class="score-tag" style="background:#d4a017;">NEEDS WORK</span></td></tr>
+      <tr><td>05 &nbsp; Party Room, Host &amp; Celebration</td><td><strong>6.6</strong>/10</td><td><div class="score-bar-bg"><div class="score-bar-fill" style="width:66%;background:#d4a017;"></div></div></td><td><span class="score-tag" style="background:#d4a017;">NEEDS WORK</span></td></tr>
+      <tr><td>06 &nbsp; Cleanliness &amp; Presentation</td><td><strong>7.8</strong>/10</td><td><div class="score-bar-bg"><div class="score-bar-fill" style="width:78%;background:#2e8b57;"></div></div></td><td><span class="score-tag" style="background:#2e8b57;">STRONG</span></td></tr>
+      <tr><td>07 &nbsp; Safety &amp; Compliance</td><td><strong>9.0</strong>/10</td><td><div class="score-bar-bg"><div class="score-bar-fill" style="width:90%;background:#e8650a;"></div></div></td><td><span class="score-tag" style="background:#e8650a;">EXCELLENT</span></td></tr>
+      <tr><td>08 &nbsp; F&amp;B Experience</td><td><strong>5.0</strong>/10</td><td><div class="score-bar-bg"><div class="score-bar-fill" style="width:50%;background:#d4a017;"></div></div></td><td><span class="score-tag" style="background:#d4a017;">NEEDS WORK</span></td></tr>
+      <tr><td>09 &nbsp; Queue Management &amp; Signage</td><td><strong>4.2</strong>/10</td><td><div class="score-bar-bg"><div class="score-bar-fill" style="width:42%;background:#c0392b;"></div></div></td><td><span class="score-tag" style="background:#c0392b;">CRITICAL</span></td></tr>
+      <tr><td>10 &nbsp; Departure &amp; Final Impressions</td><td><strong>6.7</strong>/10</td><td><div class="score-bar-bg"><div class="score-bar-fill" style="width:67%;background:#d4a017;"></div></div></td><td><span class="score-tag" style="background:#d4a017;">NEEDS WORK</span></td></tr>
+    </table>
+    <div class="method-box" style="margin-top:5mm;">
+      <strong>How scoring works.</strong> Every touchpoint is built from a series of specific, individually-scored criteria, ranging from six to twenty-three per section depending on complexity, based on exactly what was said, timed, counted or observed. The booking call and confirmation are assessed first, since the guest's experience of your business begins long before they arrive. With ten touchpoints assessed, more issues are identified than the five shown in the WAM 5 on page 3. That's deliberate. <strong>The WAM 5 is a selection, not a list of everything.</strong>
+    </div>
+  </div>
+  <div class="doc-footer"><span class="brand">WAM 5</span><span>Sample Report &nbsp;·&nbsp; Page 2 of 23</span></div>
+</div>
+
+
+<div class="page">
+  <div class="sample-badge">SAMPLE REPORT</div>
+  <div class="page-content" style="padding-top:18mm;">
+    <div class="section-eyebrow">Executive Summary, Continued</div>
+    <div class="section-title">The WAM 5: At A Glance</div>
+
+    <div class="wam5-glance-header">
+      <div class="wam5-glance-title">THE WAM <span style="color:var(--orange);">5</span>: AT A GLANCE</div>
+      <div class="wam5-glance-sub">The five priorities that will move the needle most. This is not a ranked list. Every priority below matters. Full detail, recommended actions, owners and timeframes begin on page 14.</div>
+    </div>
+
+    <div class="wam5-glance-item">
+      <div class="wam5-glance-num">01</div>
+      <div class="wam5-glance-body"><strong>Build Commercial Conversations Into Every Stage of the Party Journey.</strong> Sales scored 14.3%, the only category below half marks, with zero upsell attempts across the booking call, the confirmation, and the party itself.</div>
+    </div>
+    <div class="wam5-glance-item">
+      <div class="wam5-glance-num">02</div>
+      <div class="wam5-glance-body"><strong>Introduce Queue Management at the Two Busiest Attractions.</strong> The lowest-scoring touchpoint in the report at 4.2/10. No queue system led directly to a dispute between children.</div>
+    </div>
+    <div class="wam5-glance-item">
+      <div class="wam5-glance-num">03</div>
+      <div class="wam5-glance-body"><strong>Resource the Café for Peak Periods.</strong> An 11-minute wait and a missing item both trace to one cause: a single staff member running the till and food prep together.</div>
+    </div>
+    <div class="wam5-glance-item">
+      <div class="wam5-glance-num">04</div>
+      <div class="wam5-glance-body"><strong>Close the Loop on Party Bookings at Departure.</strong> The birthday was warmly acknowledged at the booking stage, but never referenced again, not at arrival and not on the way out.</div>
+    </div>
+    <div class="wam5-glance-item">
+      <div class="wam5-glance-num">05</div>
+      <div class="wam5-glance-body"><strong>Standardise the "Proactive Welcome" Across All Zones.</strong> The right standard already exists. Two of three tested staff interactions were excellent. It simply isn't applied consistently.</div>
+    </div>
+
+    <div style="text-align:center; margin-top:6mm;">
+      <a href="#wam5-detail" style="display:inline-block; background:var(--orange); color:white; font-family:'Barlow Condensed', sans-serif; font-weight:700; font-size:9pt; letter-spacing:0.06em; text-transform:uppercase; text-decoration:none; padding:3mm 8mm; border-radius:2px;">Go to the Full WAM 5 Detail &rarr;</a>
+    </div>
+  </div>
+  <div class="doc-footer"><span class="brand">WAM 5</span><span>Sample Report &nbsp;·&nbsp; Page 3 of 23</span></div>
+</div>
+
+<div class="page">
+  <div class="sample-badge">SAMPLE REPORT</div>
+  <div class="page-content" style="padding-top:18mm;">
+    <div class="tp-head">
+      <div class="tp-num-title"><span class="tp-num">01</span><span class="tp-title">Reservation Call</span></div>
+      <div class="tp-overall-score"><div class="val" style="color:#2e8b57;">7.8</div><div class="lbl">Overall / 10</div></div>
+    </div>
+    <div class="key-info">
+      <div class="ki-item"><div class="ki-lbl">Reason for Call</div><div class="ki-val">Birthday party enquiry, 8 children</div></div>
+      <div class="ki-item"><div class="ki-lbl">Calls Required</div><div class="ki-val">One</div></div>
+      <div class="ki-item"><div class="ki-lbl">Time of Call</div><div class="ki-val">11:15</div></div>
+      <div class="ki-item"><div class="ki-lbl">Staff Member</div><div class="ki-val">Female, identified as "Sara"</div></div>
+    </div>
+    <table class="crit-table">
+      <tr><th style="width:40%;">Criterion</th><th style="width:7%;">Cat.</th><th style="width:10%;">Score</th><th>Observation</th></tr>
+      <tr><td>Connection speed</td><td style="text-align:center;font-weight:800;color:#8e44ad;">P</td><td class="crit-score" style="color:#2e8b57;">10/10</td><td>Answered within 3 rings</td></tr>
+      <tr><td>Salutation</td><td style="text-align:center;font-weight:800;color:#e8650a;">A</td><td class="crit-score" style="color:#2e8b57;">10/10</td><td>Full greeting given, venue name and staff name stated clearly</td></tr>
+      <tr><td>Tone &amp; manner</td><td style="text-align:center;font-weight:800;color:#e8650a;">A</td><td class="crit-score" style="color:#2e8b57;">9/10</td><td>Warm and friendly throughout the call</td></tr>
+      <tr><td>Established nature of enquiry</td><td style="text-align:center;font-weight:800;color:#8e44ad;">P</td><td class="crit-score" style="color:#2e8b57;">10/10</td><td>Asked number of children and age range immediately</td></tr>
+      <tr><td>Package options explained</td><td style="text-align:center;font-weight:800;color:#8e44ad;">P</td><td class="crit-score" style="color:#d4a017;">7/10</td><td>Explained 2 of 3 available party packages; premium package not mentioned</td></tr>
+      <tr><td>Pricing quoted</td><td style="text-align:center;font-weight:800;color:#8e44ad;">P</td><td class="crit-score" style="color:#2e8b57;">10/10</td><td>Clear per-child pricing given without being asked twice</td></tr>
+      <tr><td>Upsell of add-ons</td><td style="text-align:center;font-weight:800;color:#16a085;">S</td><td class="crit-score" style="color:#c0392b;">0/10</td><td>No mention of extended play time, party host, or photo package</td></tr>
+      <tr><td>Availability check</td><td style="text-align:center;font-weight:800;color:#8e44ad;">P</td><td class="crit-score" style="color:#2e8b57;">10/10</td><td>Checked diary live on the call, offered two date options</td></tr>
+      <tr><td>Previous visit enquiry</td><td style="text-align:center;font-weight:800;color:#e8650a;">A</td><td class="crit-score" style="color:#c0392b;">0/10</td><td>Did not ask if the family had visited before</td></tr>
+      <tr><td>Dietary / allergy enquiry</td><td style="text-align:center;font-weight:800;color:#8e44ad;">P</td><td class="crit-score" style="color:#2e8b57;">10/10</td><td>Proactively asked if any children had allergies</td></tr>
+      <tr><td>Deposit / payment explained</td><td style="text-align:center;font-weight:800;color:#8e44ad;">P</td><td class="crit-score" style="color:#2e8b57;">10/10</td><td>Clearly explained deposit required to secure the date</td></tr>
+      <tr><td>Overall closure</td><td style="text-align:center;font-weight:800;color:#e8650a;">A</td><td class="crit-score" style="color:#2e8b57;">10/10</td><td>Thanked caller, confirmed next steps, offered further help</td></tr>
+    </table>
+    <div class="narrative-body">A confident, well-handled call overall. Pricing, availability and dietary needs were all covered without prompting. <strong>The two zero scores are both missed commercial opportunities</strong> rather than service failures: no attempt was made to upsell the premium package or any add-ons, and no rapport-building question about prior visits was asked.</div>
+    <div class="impact-callout"><strong>Why this matters:</strong> This call is the first impression of the business, and it's also the first sales opportunity. The service was warm enough to book the standard package, but the absence of any upsell attempt is pure margin left on the table, on every single party booking.</div>
+  </div>
+  <div class="doc-footer"><span class="brand">WAM 5</span><span>Sample Report &nbsp;·&nbsp; Page 4 of 23</span></div>
+</div>
+
+<div class="page">
+  <div class="sample-badge">SAMPLE REPORT</div>
+  <div class="page-content" style="padding-top:18mm;">
+    <div class="tp-head">
+      <div class="tp-num-title"><span class="tp-num">02</span><span class="tp-title">Booking Confirmation</span></div>
+      <div class="tp-overall-score"><div class="val" style="color:#d4a017;">7.0</div><div class="lbl">Overall / 10</div></div>
+    </div>
+    <div class="key-info">
+      <div class="ki-item"><div class="ki-lbl">Received Via</div><div class="ki-val">Email</div></div>
+      <div class="ki-item"><div class="ki-lbl">Time Received</div><div class="ki-val">14 minutes after the call</div></div>
+      <div class="ki-item"><div class="ki-lbl">Format</div><div class="ki-val">Email with PDF attachment</div></div>
+      <div class="ki-item"><div class="ki-lbl">Reminder Promised</div><div class="ki-val">None mentioned</div></div>
+    </div>
+    <table class="crit-table">
+      <tr><th style="width:40%;">Criterion</th><th style="width:7%;">Cat.</th><th style="width:10%;">Score</th><th>Observation</th></tr>
+      <tr><td>Timing of confirmation</td><td style="text-align:center;font-weight:800;color:#8e44ad;">P</td><td class="crit-score" style="color:#2e8b57;">10/10</td><td>Received within 15 minutes of the call</td></tr>
+      <tr><td>Correct grammar &amp; spelling</td><td style="text-align:center;font-weight:800;color:#8e44ad;">P</td><td class="crit-score" style="color:#2e8b57;">10/10</td><td>No errors found</td></tr>
+      <tr><td>Booking details accuracy</td><td style="text-align:center;font-weight:800;color:#8e44ad;">P</td><td class="crit-score" style="color:#2e8b57;">10/10</td><td>Date, time and package matched the call exactly</td></tr>
+      <tr><td>Terms &amp; conditions included</td><td style="text-align:center;font-weight:800;color:#8e44ad;">P</td><td class="crit-score" style="color:#2e8b57;">10/10</td><td>Cancellation policy and outside-food policy both included</td></tr>
+      <tr><td>Parking information</td><td style="text-align:center;font-weight:800;color:#8e44ad;">P</td><td class="crit-score" style="color:#c0392b;">0/10</td><td>No mention of parking location or validation</td></tr>
+      <tr><td>Arrival instructions</td><td style="text-align:center;font-weight:800;color:#8e44ad;">P</td><td class="crit-score" style="color:#2e8b57;">10/10</td><td>Clear instructions on where to check in for the party</td></tr>
+      <tr><td>Dress code / footwear policy</td><td style="text-align:center;font-weight:800;color:#8e44ad;">P</td><td class="crit-score" style="color:#2e8b57;">10/10</td><td>Socks-only policy for soft play clearly stated</td></tr>
+      <tr><td>Upsell / promotion in confirmation</td><td style="text-align:center;font-weight:800;color:#16a085;">S</td><td class="crit-score" style="color:#c0392b;">0/10</td><td>No mention of optional extras or photo packages</td></tr>
+      <tr><td>Payment / deposit instructions</td><td style="text-align:center;font-weight:800;color:#8e44ad;">P</td><td class="crit-score" style="color:#2e8b57;">10/10</td><td>Secure payment link included for the deposit</td></tr>
+      <tr><td>Pre-arrival reminder promised</td><td style="text-align:center;font-weight:800;color:#8e44ad;">P</td><td class="crit-score" style="color:#c0392b;">0/10</td><td>No mention of a reminder closer to the date</td></tr>
+    </table>
+    <div class="narrative-body">The confirmation itself is accurate, fast and professional. Everything a guest needs to know about arrival, dress code and policy is there. <strong>What's missing is everything commercial and everything reassuring</strong>: no parking guidance, no reminder closer to the date, and a second missed opportunity to upsell that wasn't taken at the booking stage either.</div>
+    <div class="impact-callout"><strong>Why this matters:</strong> A parent organising an 8-child birthday party is anxious about logistics. Parking guidance and a pre-arrival reminder cost nothing to add and directly reduce day-of-event stress, exactly the kind of detail that turns a one-off booking into a returning family.</div>
+  </div>
+  <div class="doc-footer"><span class="brand">WAM 5</span><span>Sample Report &nbsp;·&nbsp; Page 5 of 23</span></div>
+</div>
+
+<div class="page">
+  <div class="sample-badge">SAMPLE REPORT</div>
+  <div class="page-content" style="padding-top:18mm;">
+    <div class="tp-head">
+      <div class="tp-num-title"><span class="tp-num">03</span><span class="tp-title">Arrival &amp; First Impressions</span></div>
+      <div class="tp-overall-score"><div class="val" style="color:#2e8b57;">8.3</div><div class="lbl">Overall / 10</div></div>
+    </div>
+    <div class="key-info">
+      <div class="ki-item"><div class="ki-lbl">Visit Type</div><div class="ki-val">Unannounced, weekend afternoon</div></div>
+      <div class="ki-item"><div class="ki-lbl">Arrival Time</div><div class="ki-val">14:05</div></div>
+      <div class="ki-item"><div class="ki-lbl">Staff Member</div><div class="ki-val">Male, security/host desk</div></div>
+      <div class="ki-item"><div class="ki-lbl">Guests in Queue</div><div class="ki-val">Approx. 8 at ticketing</div></div>
+    </div>
+    <table class="crit-table">
+      <tr><th style="width:40%;">Criterion</th><th style="width:7%;">Cat.</th><th style="width:10%;">Score</th><th>Observation</th></tr>
+      <tr><td>Exterior &amp; car park presentation</td><td style="text-align:center;font-weight:800;color:#2980b9;">F</td><td class="crit-score" style="color:#2e8b57;">9/10</td><td>Clean, well-lit, clearly marked bays, no litter observed</td></tr>
+      <tr><td>Signage to main entrance</td><td style="text-align:center;font-weight:800;color:#2980b9;">F</td><td class="crit-score" style="color:#2e8b57;">8/10</td><td>Clear directional signage; one sign partially faded</td></tr>
+      <tr><td>Entrance greeting</td><td style="text-align:center;font-weight:800;color:#e8650a;">A</td><td class="crit-score" style="color:#2e8b57;">9/10</td><td>Genuine, unscripted greeting, warm tone, good eye contact</td></tr>
+      <tr><td>Ticketing speed</td><td style="text-align:center;font-weight:800;color:#8e44ad;">P</td><td class="crit-score" style="color:#d4a017;">7/10</td><td>2 min 40 sec during moderate footfall, acceptable but not fast</td></tr>
+      <tr><td>Second till opened at peak</td><td style="text-align:center;font-weight:800;color:#8e44ad;">P</td><td class="crit-score" style="color:#2e8b57;">9/10</td><td>Second staff member called over once queue reached 6</td></tr>
+      <tr><td>Accessibility at entry</td><td style="text-align:center;font-weight:800;color:#2980b9;">F</td><td class="crit-score" style="color:#d4a017;">8/10</td><td>Ramp present and clear; doors heavy, no staff assist offered</td></tr>
+      <tr><td>Welcome consistency with booking</td><td style="text-align:center;font-weight:800;color:#8e44ad;">P</td><td class="crit-score" style="color:#2e8b57;">8/10</td><td>Staff correctly found the pre-booked party reservation on arrival</td></tr>
+    </table>
+    <div class="narrative-body">Arrival sets a strong tone, and the booking made over the phone translated cleanly into a smooth check-in. <strong>The heavy entrance doors remain the one physical obstacle</strong> for guests managing strollers or multiple children unassisted, despite the host stand sitting in direct line of sight.</div>
+    <div class="impact-callout"><strong>Why this matters:</strong> The continuity between the booking call and arrival, staff correctly finding the reservation without confusion, is a genuine operational strength worth protecting as party volume grows.</div>
+  </div>
+  <div class="doc-footer"><span class="brand">WAM 5</span><span>Sample Report &nbsp;·&nbsp; Page 6 of 23</span></div>
+</div>
+
+<div class="page">
+  <div class="sample-badge">SAMPLE REPORT</div>
+  <div class="page-content" style="padding-top:18mm;">
+    <div class="tp-head">
+      <div class="tp-num-title"><span class="tp-num">04</span><span class="tp-title">Welcome &amp; Staff Engagement</span></div>
+      <div class="tp-overall-score"><div class="val" style="color:#d4a017;">7.3</div><div class="lbl">Overall / 10</div></div>
+    </div>
+    <div class="key-info">
+      <div class="ki-item"><div class="ki-lbl">Zones Tested</div><div class="ki-val">Entrance, soft play, climbing wall</div></div>
+      <div class="ki-item"><div class="ki-lbl">Interactions Tested</div><div class="ki-val">3 separate staff members</div></div>
+      <div class="ki-item"><div class="ki-lbl">Uniform Standard</div><div class="ki-val">Consistent across all zones</div></div>
+      <div class="ki-item"><div class="ki-lbl">Name Badges</div><div class="ki-val">Visible on all 3 staff tested</div></div>
+    </div>
+    <table class="crit-table">
+      <tr><th style="width:40%;">Criterion</th><th style="width:7%;">Cat.</th><th style="width:10%;">Score</th><th>Observation</th></tr>
+      <tr><td>Eye contact &amp; verbal greeting</td><td style="text-align:center;font-weight:800;color:#e8650a;">A</td><td class="crit-score" style="color:#2e8b57;">8/10</td><td>2 of 3 tested interactions had genuine eye contact and a question asked</td></tr>
+      <tr><td>Proactive offer of help</td><td style="text-align:center;font-weight:800;color:#e8650a;">A</td><td class="crit-score" style="color:#d4a017;">6/10</td><td>No staff proactively offered directions; all info had to be requested</td></tr>
+      <tr><td>Staff appearance</td><td style="text-align:center;font-weight:800;color:#e8650a;">A</td><td class="crit-score" style="color:#2e8b57;">8/10</td><td>Clean, consistent uniforms, badges visible throughout</td></tr>
+      <tr><td>Consistency across zones</td><td style="text-align:center;font-weight:800;color:#e8650a;">A</td><td class="crit-score" style="color:#d4a017;">7/10</td><td>Climbing zone noticeably weaker than the other two tested</td></tr>
+      <tr><td>Engagement with children directly</td><td style="text-align:center;font-weight:800;color:#e8650a;">A</td><td class="crit-score" style="color:#2e8b57;">8/10</td><td>Soft play attendant spoke directly to the children, not just the parent</td></tr>
+      <tr><td>Recovery from distraction</td><td style="text-align:center;font-weight:800;color:#e8650a;">A</td><td class="crit-score" style="color:#d4a017;">7/10</td><td>Climbing attendant mid-conversation with colleague; took 8 seconds to disengage</td></tr>
+    </table>
+    <div class="narrative-body">The standard exists and was observed twice out of three tests, including a nice detail: a soft play attendant addressing the children directly rather than only the accompanying adult. <strong>The climbing zone interaction was the clear outlier</strong>, and no staff member anywhere proactively offered directions or guidance without being asked first.</div>
+    <div class="impact-callout"><strong>Why this matters:</strong> This reads as a reinforcement issue, not a training gap. The desired behaviour clearly exists in the building already. The task is spreading it consistently, not teaching it from scratch.</div>
+  </div>
+  <div class="doc-footer"><span class="brand">WAM 5</span><span>Sample Report &nbsp;·&nbsp; Page 7 of 23</span></div>
+</div>
+
+<div class="page">
+  <div class="sample-badge">SAMPLE REPORT</div>
+  <div class="page-content" style="padding-top:18mm;">
+    <div class="tp-head">
+      <div class="tp-num-title"><span class="tp-num">05</span><span class="tp-title">Party Room, Host &amp; Celebration</span></div>
+      <div class="tp-overall-score"><div class="val" style="color:#d4a017;">6.6</div><div class="lbl">Overall / 10</div></div>
+    </div>
+    <div class="key-info">
+      <div class="ki-item"><div class="ki-lbl">Party Room</div><div class="ki-val">"Coral Room", 8 children + 6 adults</div></div>
+      <div class="ki-item"><div class="ki-lbl">Host</div><div class="ki-val">Female, identified as "Priya"</div></div>
+      <div class="ki-item"><div class="ki-lbl">Party Start Time</div><div class="ki-val">14:30 (booked slot)</div></div>
+      <div class="ki-item"><div class="ki-lbl">Other Families Present</div><div class="ki-val">7, all parents in the room</div></div>
+    </div>
+    <table class="crit-table">
+      <tr><th style="width:40%;">Criterion</th><th style="width:7%;">Cat.</th><th style="width:10%;">Score</th><th>Observation</th></tr>
+      <tr><td>Room size & capacity for party size</td><td style="text-align:center;font-weight:800;color:#2980b9;">F</td><td class="crit-score" style="color:#2e8b57;">9/10</td><td>Comfortable space for 8 children plus accompanying adults</td></tr>
+<tr><td>Decorations, themed and age-appropriate</td><td style="text-align:center;font-weight:800;color:#2980b9;">F</td><td class="crit-score" style="color:#2e8b57;">8/10</td><td>On-theme balloons and banners, attractive setup</td></tr>
+<tr><td>Room cleanliness before group entry</td><td style="text-align:center;font-weight:800;color:#2980b9;">F</td><td class="crit-score" style="color:#2e8b57;">9/10</td><td>Spotless and fully reset from the previous booking</td></tr>
+<tr><td>Table setup pre-prepared on arrival</td><td style="text-align:center;font-weight:800;color:#8e44ad;">P</td><td class="crit-score" style="color:#2e8b57;">8/10</td><td>Plates, cups and party hats already laid out when the group arrived</td></tr>
+<tr><td>Host arrival & introduction</td><td style="text-align:center;font-weight:800;color:#e8650a;">A</td><td class="crit-score" style="color:#2e8b57;">9/10</td><td>Warm, enthusiastic introduction to the whole group, not just the parent</td></tr>
+<tr><td>Games organised & age-appropriate</td><td style="text-align:center;font-weight:800;color:#8e44ad;">P</td><td class="crit-score" style="color:#2e8b57;">8/10</td><td>Good variety, matched well to the age range of the group</td></tr>
+<tr><td>Host engagement with all children, not just celebrant</td><td style="text-align:center;font-weight:800;color:#e8650a;">A</td><td class="crit-score" style="color:#d4a017;">6/10</td><td>Noticeably more attention given to the two loudest children</td></tr>
+<tr><td>Host energy & enthusiasm throughout</td><td style="text-align:center;font-weight:800;color:#e8650a;">A</td><td class="crit-score" style="color:#2e8b57;">9/10</td><td>Maintained energy across the full session, didn't flatten by the end</td></tr>
+<tr><td>Timing management against the schedule</td><td style="text-align:center;font-weight:800;color:#8e44ad;">P</td><td class="crit-score" style="color:#d4a017;">7/10</td><td>Ran 10 minutes over the booked slot</td></tr>
+<tr><td>Handling of a conflict between children</td><td style="text-align:center;font-weight:800;color:#e8650a;">A</td><td class="crit-score" style="color:#2e8b57;">8/10</td><td>One dispute over a game handled calmly and fairly</td></tr>
+<tr><td>Food served in the party room</td><td style="text-align:center;font-weight:800;color:#8e44ad;">P</td><td class="crit-score" style="color:#2e8b57;">9/10</td><td>All food brought to the room, no need to queue elsewhere</td></tr>
+<tr><td>Package food options explained to parent</td><td style="text-align:center;font-weight:800;color:#8e44ad;">P</td><td class="crit-score" style="color:#2e8b57;">8/10</td><td>Options talked through clearly at the point of booking confirmation</td></tr>
+<tr><td>Vegetarian / dietary option proactively offered</td><td style="text-align:center;font-weight:800;color:#8e44ad;">P</td><td class="crit-score" style="color:#c0392b;">4/10</td><td>Available but only provided after the parent specifically asked</td></tr>
+<tr><td>Food quality</td><td style="text-align:center;font-weight:800;color:#2980b9;">F</td><td class="crit-score" style="color:#d4a017;">7/10</td><td>Good quality, age-appropriate portions</td></tr>
+<tr><td>Food served on time</td><td style="text-align:center;font-weight:800;color:#8e44ad;">P</td><td class="crit-score" style="color:#d4a017;">7/10</td><td>Arrived 8 minutes after the party officially started</td></tr>
+<tr><td>Celebrant acknowledgement (badge / sash / crown)</td><td style="text-align:center;font-weight:800;color:#e8650a;">A</td><td class="crit-score" style="color:#2e8b57;">9/10</td><td>Birthday child given a sash on arrival, visibly delighted</td></tr>
+<tr><td>Birthday song led by host</td><td style="text-align:center;font-weight:800;color:#e8650a;">A</td><td class="crit-score" style="color:#2e8b57;">10/10</td><td>Enthusiastically led, all children joined in</td></tr>
+<tr><td>Celebrant given a small gift or memento</td><td style="text-align:center;font-weight:800;color:#e8650a;">A</td><td class="crit-score" style="color:#2e8b57;">8/10</td><td>A small goodie bag specific to the celebrant, separate from guest bags</td></tr>
+<tr><td>Celebrant photo opportunity offered</td><td style="text-align:center;font-weight:800;color:#e8650a;">A</td><td class="crit-score" style="color:#d4a017;">7/10</td><td>Host offered to take a photo, but only after being asked</td></tr>
+<tr><td>Repeat visit offer made to attending families</td><td style="text-align:center;font-weight:800;color:#16a085;">S</td><td class="crit-score" style="color:#c0392b;">0/10</td><td>No mention made to any parent of returning for a standard visit</td></tr>
+<tr><td>Future party package promoted to other parents</td><td style="text-align:center;font-weight:800;color:#16a085;">S</td><td class="crit-score" style="color:#c0392b;">0/10</td><td>Despite 7 other families present, no party package was mentioned to any of them</td></tr>
+<tr><td>Take-home flyer or voucher given to each family</td><td style="text-align:center;font-weight:800;color:#16a085;">S</td><td class="crit-score" style="color:#c0392b;">2/10</td><td>One flyer left on a side table; not handed individually to any parent</td></tr>
+<tr><td>Contact details collected from other parents</td><td style="text-align:center;font-weight:800;color:#16a085;">S</td><td class="crit-score" style="color:#c0392b;">0/10</td><td>No attempt made to capture contact details for future marketing</td></tr>
+
+    </table>
+    <div class="narrative-body">The room, host and treatment of the birthday child were all genuinely strong, exactly the kind of experience that justifies the package price and brings a family back. <strong>The complete absence of any commercial follow-through is the story here.</strong> Seven other families sat in that room for forty-five minutes, and not one was offered a return visit, a party package, or even a flyer handed to them directly.</div>
+    <div class="impact-callout"><strong>Why this matters:</strong> A birthday party is the single highest-leverage sales moment in the entire FEC calendar. A captive room of exactly the right audience, already in a positive emotional state. Leaving it untouched three times over (the booking call, the confirmation, and now the party itself) isn't a training gap, it's a structural gap in how the journey is designed.</div>
+  </div>
+  <div class="doc-footer"><span class="brand">WAM 5</span><span>Sample Report &nbsp;·&nbsp; Page 8 of 23</span></div>
+</div>
+<div class="page">
+  <div class="sample-badge">SAMPLE REPORT</div>
+  <div class="page-content" style="padding-top:18mm;">
+    <div class="tp-head">
+      <div class="tp-num-title"><span class="tp-num">06</span><span class="tp-title">Cleanliness &amp; Presentation</span></div>
+      <div class="tp-overall-score"><div class="val" style="color:#2e8b57;">7.8</div><div class="lbl">Overall / 10</div></div>
+    </div>
+    <div class="key-info">
+      <div class="ki-item"><div class="ki-lbl">Restrooms Checked</div><div class="ki-val">Twice, 45 mins apart</div></div>
+      <div class="ki-item"><div class="ki-lbl">Zones Inspected</div><div class="ki-val">Main play, toddler zone, F&amp;B seating</div></div>
+      <div class="ki-item"><div class="ki-lbl">Bins Checked</div><div class="ki-val">4 locations</div></div>
+      <div class="ki-item"><div class="ki-lbl">Time of Inspection</div><div class="ki-val">14:20 &amp; 15:05</div></div>
+    </div>
+    <table class="crit-table">
+      <tr><th style="width:40%;">Criterion</th><th style="width:7%;">Cat.</th><th style="width:10%;">Score</th><th>Observation</th></tr>
+      <tr><td>Main play areas &amp; circulation</td><td style="text-align:center;font-weight:800;color:#2980b9;">F</td><td class="crit-score" style="color:#2e8b57;">9/10</td><td>Clean and well-maintained throughout the full visit</td></tr>
+      <tr><td>Restroom standard, 1st check</td><td style="text-align:center;font-weight:800;color:#2980b9;">F</td><td class="crit-score" style="color:#2e8b57;">9/10</td><td>Fully stocked and presentable at 14:20</td></tr>
+      <tr><td>Restroom standard, 2nd check</td><td style="text-align:center;font-weight:800;color:#2980b9;">F</td><td class="crit-score" style="color:#d4a017;">6/10</td><td>Paper towel dispenser empty at 15:05, 45 min later</td></tr>
+      <tr><td>Equipment &amp; soft play condition</td><td style="text-align:center;font-weight:800;color:#2980b9;">F</td><td class="crit-score" style="color:#2e8b57;">8/10</td><td>Generally good; minor wear visible on toddler zone padding</td></tr>
+      <tr><td>General tidiness</td><td style="text-align:center;font-weight:800;color:#2980b9;">F</td><td class="crit-score" style="color:#d4a017;">7/10</td><td>One overflowing bin near F&amp;B seating during peak period</td></tr>
+      <tr><td>Bin capacity vs. footfall</td><td style="text-align:center;font-weight:800;color:#2980b9;">F</td><td class="crit-score" style="color:#d4a017;">8/10</td><td>3 of 4 bins checked were appropriately sized; F&amp;B zone bin undersized</td></tr>
+    </table>
+    <div class="narrative-body">The two-check restroom test was specifically designed to test consistency over time, not just a single snapshot, and it found exactly that kind of gap. Excellent at the first check, one specific failure 45 minutes later. <strong>This points to a restocking schedule issue</strong> during busier periods rather than a one-off oversight.</div>
+    <div class="impact-callout"><strong>Why this matters:</strong> Cleanliness failures are noticed disproportionately to their frequency. One empty dispenser can outweigh an hour of otherwise spotless presentation in a guest's overall impression.</div>
+  </div>
+  <div class="doc-footer"><span class="brand">WAM 5</span><span>Sample Report &nbsp;·&nbsp; Page 9 of 23</span></div>
+</div>
+
+<div class="page">
+  <div class="sample-badge">SAMPLE REPORT</div>
+  <div class="page-content" style="padding-top:18mm;">
+    <div class="tp-head">
+      <div class="tp-num-title"><span class="tp-num">07</span><span class="tp-title">Safety &amp; Compliance</span></div>
+      <div class="tp-overall-score"><div class="val" style="color:#e8650a;">9.0</div><div class="lbl">Overall / 10</div></div>
+    </div>
+    <div class="key-info">
+      <div class="ki-item"><div class="ki-lbl">Height Checks Observed</div><div class="ki-val">3 instances</div></div>
+      <div class="ki-item"><div class="ki-lbl">Supervision Points Checked</div><div class="ki-val">4 zones</div></div>
+      <div class="ki-item"><div class="ki-lbl">Fire Exits Checked</div><div class="ki-val">3 of 3 on route</div></div>
+      <div class="ki-item"><div class="ki-lbl">First Aid Point</div><div class="ki-val">Located near reception</div></div>
+    </div>
+    <table class="crit-table">
+      <tr><th style="width:40%;">Criterion</th><th style="width:7%;">Cat.</th><th style="width:10%;">Score</th><th>Observation</th></tr>
+      <tr><td>Height/age restriction enforcement</td><td style="text-align:center;font-weight:800;color:#8e44ad;">P</td><td class="crit-score" style="color:#2e8b57;">10/10</td><td>Correctly checked and enforced across all 3 observed instances</td></tr>
+      <tr><td>Active staff supervision</td><td style="text-align:center;font-weight:800;color:#e8650a;">A</td><td class="crit-score" style="color:#2e8b57;">9/10</td><td>Staff maintained active sightlines, repositioning to keep visibility</td></tr>
+      <tr><td>First aid &amp; emergency signage</td><td style="text-align:center;font-weight:800;color:#2980b9;">F</td><td class="crit-score" style="color:#2e8b57;">10/10</td><td>Visible, current, correctly positioned throughout</td></tr>
+      <tr><td>Fire exit visibility</td><td style="text-align:center;font-weight:800;color:#2980b9;">F</td><td class="crit-score" style="color:#d4a017;">9/10</td><td>One exit sign partially obscured by a promotional banner</td></tr>
+      <tr><td>Staff response to a height-restricted child</td><td style="text-align:center;font-weight:800;color:#e8650a;">A</td><td class="crit-score" style="color:#2e8b57;">8/10</td><td>Politely but firmly redirected despite mild parental pushback</td></tr>
+      <tr><td>Equipment safety checks visible</td><td style="text-align:center;font-weight:800;color:#8e44ad;">P</td><td class="crit-score" style="color:#2e8b57;">8/10</td><td>Staff observed checking harness/clips before climbing wall use</td></tr>
+    </table>
+    <div class="narrative-body">The strongest-performing touchpoint of the entire visit, including the booking call. Supervision behaviour in particular, staff actively scanning and repositioning rather than standing passively, is exactly the standard worth using as an internal benchmark elsewhere on site.</div>
+    <div class="impact-callout"><strong>Why this matters:</strong> This is the standard to protect and replicate, not to fix. The single deduction, a banner obscuring an exit sign, is a five-minute correction.</div>
+  </div>
+  <div class="doc-footer"><span class="brand">WAM 5</span><span>Sample Report &nbsp;·&nbsp; Page 10 of 23</span></div>
+</div>
+
+<div class="page">
+  <div class="sample-badge">SAMPLE REPORT</div>
+  <div class="page-content" style="padding-top:18mm;">
+    <div class="tp-head">
+      <div class="tp-num-title"><span class="tp-num">08</span><span class="tp-title">F&amp;B Experience</span></div>
+      <div class="tp-overall-score"><div class="val" style="color:#d4a017;">5.0</div><div class="lbl">Overall / 10</div></div>
+    </div>
+    <div class="key-info">
+      <div class="ki-item"><div class="ki-lbl">Order Placed</div><div class="ki-val">14:40</div></div>
+      <div class="ki-item"><div class="ki-lbl">Order Received</div><div class="ki-val">14:51 (11 min wait)</div></div>
+      <div class="ki-item"><div class="ki-lbl">Staff on Till</div><div class="ki-val">1 (2 others visible on floor)</div></div>
+      <div class="ki-item"><div class="ki-lbl">Order</div><div class="ki-val">2 items, 1 missing on collection</div></div>
+    </div>
+    <table class="crit-table">
+      <tr><th style="width:40%;">Criterion</th><th style="width:7%;">Cat.</th><th style="width:10%;">Score</th><th>Observation</th></tr>
+      <tr><td>Order wait time</td><td style="text-align:center;font-weight:800;color:#8e44ad;">P</td><td class="crit-score" style="color:#c0392b;">4/10</td><td>11 minutes from joining the line to receiving food</td></tr>
+      <tr><td>Staffing during peak</td><td style="text-align:center;font-weight:800;color:#8e44ad;">P</td><td class="crit-score" style="color:#c0392b;">3/10</td><td>2 further staff visible on floor, not redirected to support till</td></tr>
+      <tr><td>Order accuracy</td><td style="text-align:center;font-weight:800;color:#8e44ad;">P</td><td class="crit-score" style="color:#d4a017;">5/10</td><td>1 of 2 items missing; corrected only after guest raised it</td></tr>
+      <tr><td>Recovery from order error</td><td style="text-align:center;font-weight:800;color:#e8650a;">A</td><td class="crit-score" style="color:#d4a017;">5/10</td><td>Corrected promptly but no apology or compensation offered</td></tr>
+      <tr><td>Food quality &amp; presentation</td><td style="text-align:center;font-weight:800;color:#2980b9;">F</td><td class="crit-score" style="color:#d4a017;">6/10</td><td>Acceptable but unremarkable</td></tr>
+      <tr><td>Seating availability at peak</td><td style="text-align:center;font-weight:800;color:#2980b9;">F</td><td class="crit-score" style="color:#d4a017;">7/10</td><td>Several uncleared tables reduced available seating</td></tr>
+    </table>
+    <div class="narrative-body">The 11-minute wait and missing item trace back to the same root cause: one staff member running both till and food prep simultaneously, while two further colleagues remained visible elsewhere on the floor. <strong>This is a staffing-allocation issue, not a kitchen or menu problem.</strong></div>
+    <div class="impact-callout"><strong>Why this matters:</strong> F&amp;B disproportionately defines a guest's overall rating of the day. The lowest-scoring criteria here both share one fix: moving staff to the till during known peak windows.</div>
+  </div>
+  <div class="doc-footer"><span class="brand">WAM 5</span><span>Sample Report &nbsp;·&nbsp; Page 11 of 23</span></div>
+</div>
+
+<div class="page">
+  <div class="sample-badge">SAMPLE REPORT</div>
+  <div class="page-content" style="padding-top:18mm;">
+    <div class="tp-head">
+      <div class="tp-num-title"><span class="tp-num">09</span><span class="tp-title">Queue Management &amp; Signage</span></div>
+      <div class="tp-overall-score"><div class="val" style="color:#c0392b;">4.2</div><div class="lbl">Overall / 10</div></div>
+    </div>
+    <div class="key-info">
+      <div class="ki-item"><div class="ki-lbl">Attractions Tested</div><div class="ki-val">Main slide, trampoline zone</div></div>
+      <div class="ki-item"><div class="ki-lbl">Wait-Time Signage</div><div class="ki-val">None present</div></div>
+      <div class="ki-item"><div class="ki-lbl">Directions Requested</div><div class="ki-val">3 staff members, 1 family</div></div>
+      <div class="ki-item"><div class="ki-lbl">Time Lost to Confusion</div><div class="ki-val">~6 minutes, 1 instance</div></div>
+    </div>
+    <table class="crit-table">
+      <tr><th style="width:40%;">Criterion</th><th style="width:7%;">Cat.</th><th style="width:10%;">Score</th><th>Observation</th></tr>
+      <tr><td>Wait-time indicators</td><td style="text-align:center;font-weight:800;color:#2980b9;">F</td><td class="crit-score" style="color:#c0392b;">3/10</td><td>None present at either of the two busiest attractions</td></tr>
+      <tr><td>Queue structure &amp; order</td><td style="text-align:center;font-weight:800;color:#8e44ad;">P</td><td class="crit-score" style="color:#c0392b;">4/10</td><td>Informal, self-organised; visible guest frustration observed</td></tr>
+      <tr><td>Dispute mediation</td><td style="text-align:center;font-weight:800;color:#e8650a;">A</td><td class="crit-score" style="color:#c0392b;">2/10</td><td>No staff present when a queue dispute broke out between two groups of children</td></tr>
+      <tr><td>Directional signage between zones</td><td style="text-align:center;font-weight:800;color:#2980b9;">F</td><td class="crit-score" style="color:#c0392b;">4/10</td><td>Present at zone entrances only, absent at decision points between</td></tr>
+      <tr><td>Staff availability for directions</td><td style="text-align:center;font-weight:800;color:#e8650a;">A</td><td class="crit-score" style="color:#d4a017;">5/10</td><td>Helpful when asked, but had to be actively sought out</td></tr>
+      <tr><td>Wayfinding to restrooms specifically</td><td style="text-align:center;font-weight:800;color:#2980b9;">F</td><td class="crit-score" style="color:#d4a017;">7/10</td><td>Eventually found after asking 3 staff members</td></tr>
+    </table>
+    <div class="narrative-body">The clearest and most significant gap identified anywhere in this evaluation, including the booking journey. No queue system at either popular attraction led directly to a dispute between two groups of children, with no staff present to mediate.</div>
+    <div class="impact-callout"><strong>Why this matters:</strong> This single touchpoint is the strongest driver of the overall score sitting below the otherwise strong booking, arrival and safety performance. It's also one of the cheapest to fix.</div>
+  </div>
+  <div class="doc-footer"><span class="brand">WAM 5</span><span>Sample Report &nbsp;·&nbsp; Page 12 of 23</span></div>
+</div>
+
+<div class="page">
+  <div class="sample-badge">SAMPLE REPORT</div>
+  <div class="page-content" style="padding-top:18mm;">
+    <div class="tp-head">
+      <div class="tp-num-title"><span class="tp-num">10</span><span class="tp-title">Departure &amp; Final Impressions</span></div>
+      <div class="tp-overall-score"><div class="val" style="color:#d4a017;">6.7</div><div class="lbl">Overall / 10</div></div>
+    </div>
+    <div class="key-info">
+      <div class="ki-item"><div class="ki-lbl">Departure Time</div><div class="ki-val">16:35</div></div>
+      <div class="ki-item"><div class="ki-lbl">Staff at Exit</div><div class="ki-val">None observed</div></div>
+      <div class="ki-item"><div class="ki-lbl">Feedback Mechanism</div><div class="ki-val">QR code, entrance only</div></div>
+      <div class="ki-item"><div class="ki-lbl">Retail Kiosk</div><div class="ki-val">Staffed, well-stocked</div></div>
+    </div>
+    <table class="crit-table">
+      <tr><th style="width:40%;">Criterion</th><th style="width:7%;">Cat.</th><th style="width:10%;">Score</th><th>Observation</th></tr>
+      <tr><td>Staff presence near exit</td><td style="text-align:center;font-weight:800;color:#e8650a;">A</td><td class="crit-score" style="color:#c0392b;">5/10</td><td>No staff member visible to thank guests or assist on exit</td></tr>
+      <tr><td>Retail kiosk experience</td><td style="text-align:center;font-weight:800;color:#16a085;">S</td><td class="crit-score" style="color:#2e8b57;">8/10</td><td>Well-stocked, friendly, low-pressure upselling approach</td></tr>
+      <tr><td>Feedback mechanism visibility</td><td style="text-align:center;font-weight:800;color:#8e44ad;">P</td><td class="crit-score" style="color:#d4a017;">7/10</td><td>QR code present at entrance only, not reinforced at exit</td></tr>
+      <tr><td>Party-specific farewell</td><td style="text-align:center;font-weight:800;color:#e8650a;">A</td><td class="crit-score" style="color:#c0392b;">4/10</td><td>No acknowledgement of the birthday occasion on departure</td></tr>
+      <tr><td>Belongings / lost property check</td><td style="text-align:center;font-weight:800;color:#e8650a;">A</td><td class="crit-score" style="color:#2e8b57;">8/10</td><td>Staff proactively asked if all belongings had been collected</td></tr>
+      <tr><td>Overall closing impression</td><td style="text-align:center;font-weight:800;color:#e8650a;">A</td><td class="crit-score" style="color:#d4a017;">8/10</td><td>Functional and efficient, but unremarkable relative to arrival</td></tr>
+    </table>
+    <div class="narrative-body">A specific, avoidable miss: the party booking that was acknowledged warmly at the reservation stage was never referenced again on the way out. <strong>The emotional thread set up by the booking call was dropped well before the visit ended.</strong></div>
+    <div class="impact-callout"><strong>Why this matters:</strong> Departure is the last impression carried into a decision to return. For a birthday party specifically, a simple "hope they had a great birthday" closes a loop that was opened on the phone three weeks earlier.</div>
+  </div>
+  <div class="doc-footer"><span class="brand">WAM 5</span><span>Sample Report &nbsp;·&nbsp; Page 13 of 23</span></div>
+</div>
+
+<div class="page" id="wam5-detail">
+  <div class="sample-badge">SAMPLE REPORT</div>
+  <div class="wam5-header-band">
+    <div class="wam5-band-label">THE WAM &nbsp;<span>5</span></div>
+    <div class="wam5-band-sub">Five priorities, selected from ten assessed touchpoints, that will move the needle most. This is not a ranked order. Every priority below matters.</div>
+  </div>
+  <div class="page-content" style="padding-top:7mm;">
+    <div class="priority-head"><span class="priority-num">01</span><span class="priority-title">Build Commercial Conversations Into Every Stage of the Party Journey</span></div>
+    <div class="priority-sub">The Finding</div>
+    <div class="priority-body">The same gap appears three separate times across the guest journey. There was no upsell attempt on the booking call. There was no upsell mention in the written confirmation that followed. And most strikingly, no repeat visit offer or party package promotion was made to any of the seven other families who sat in the party room for forty five minutes. Sales is the only category to score below 50% anywhere in this report, landing at 14.3%, while Attitude, Facility and Process all scored above 70%. This isn't a case of a few staff members missing a trick. It's a structural gap in how the booking and party journey has been designed. Nobody in the business has been given a moment, a line, or a prompt to make these conversations happen, so understandably, nobody does.</div>
+    <div class="priority-sub">THINK</div>
+    <ul class="priority-list">
+      <li><strong>Add one upsell line to the booking script and the confirmation template.</strong> A premium package or a single add on, offered once, with no pressure attached.</li>
+      <li><strong>Give the party host a single closing line</strong> to use with parents as they collect their children. A return visit offer and a take home flyer, handed individually rather than left on a side table.</li>
+      <li><strong>Capture contact details from at least the parents who ask questions</strong> during the party, so there is a list to follow up with afterwards.</li>
+      <li><strong>Treat this as one connected journey, not three separate moments.</strong> The same message, reinforced at the call, the confirmation and the party itself, will land far better than three disconnected attempts.</li>
+    </ul>
+    <div class="priority-meta-row">
+      <div class="priority-meta"><div class="lbl">Suggested Timeframe</div><div class="val">1–2 Weeks</div></div>
+      <div class="priority-meta"><div class="lbl">Likely Investment</div><div class="val">None</div></div>
+    </div>
+  </div>
+  <div class="doc-footer"><span class="brand">WAM 5</span><span>Sample Report &nbsp;·&nbsp; Page 14 of 23</span></div>
+</div>
+
+<div class="page">
+  <div class="sample-badge">SAMPLE REPORT</div>
+  <div class="page-content" style="padding-top:18mm;">
+    <div class="priority-head"><span class="priority-num">02</span><span class="priority-title">Introduce Queue Management at the Two Busiest Attractions</span></div>
+    <div class="priority-sub">The Finding</div>
+    <div class="priority-body">This was the lowest scoring touchpoint in the entire evaluation at 4.2 out of 10. No wait time indicator was present at either the main slide or the trampoline zone, the two most popular attractions on site. This led directly to a dispute between two groups of children over whose turn it was next, and no staff member was present to mediate. The absence of a system here is not a small oversight. It is the single biggest reason the overall score sits below where the strong arrival, safety and party experience would otherwise put it. Guests do not experience a venue as a set of individual scores. They experience it as a single afternoon, and an unmanaged queue at the busiest point of that afternoon can undo a lot of good work elsewhere.</div>
+    <div class="priority-sub">THINK</div>
+    <ul class="priority-list">
+      <li><strong>Install a simple wait time sign</strong> at both attractions. Even a manually updated whiteboard estimate is a significant improvement over having nothing at all.</li>
+      <li><strong>Assign a queue host during identified peak windows,</strong> most likely weekend afternoons, to structure the line and step in before disputes start.</li>
+      <li><strong>Mark the queue path physically</strong> with stanchions or floor markings, so the line itself communicates order without staff needing to intervene constantly.</li>
+      <li><strong>Brief the team on what to do when a dispute starts,</strong> rather than relying on whoever happens to be nearby to notice and react.</li>
+    </ul>
+    <div class="priority-meta-row">
+      <div class="priority-meta"><div class="lbl">Suggested Timeframe</div><div class="val">2–3 Weeks</div></div>
+      <div class="priority-meta"><div class="lbl">Likely Investment</div><div class="val">Low</div></div>
+    </div>
+  </div>
+  <div class="doc-footer"><span class="brand">WAM 5</span><span>Sample Report &nbsp;·&nbsp; Page 15 of 23</span></div>
+</div>
+
+<div class="page">
+  <div class="sample-badge">SAMPLE REPORT</div>
+  <div class="page-content" style="padding-top:18mm;">
+    <div class="priority-head"><span class="priority-num">03</span><span class="priority-title">Resource the Café for Peak Periods</span></div>
+    <div class="priority-sub">The Finding</div>
+    <div class="priority-body">An eleven minute wait and a missing item from a two item order both trace back to the same root cause. A single staff member was running the till and food preparation simultaneously, while two further colleagues remained visible elsewhere on the floor and were not redirected to support. This is a staffing allocation issue rather than a kitchen or menu problem, which is actually good news, because it means the fix does not require new equipment, new training, or a change to the menu. It requires a different decision about where people stand during the periods that are already known to be busy.</div>
+    <div class="priority-sub">THINK</div>
+    <ul class="priority-list">
+      <li><strong>Build a peak hours rota</strong> that moves a second staff member onto the till during the windows already known to be busiest, rather than treating café staffing as fixed throughout the day.</li>
+      <li><strong>Introduce a simple order check</strong> before trays leave the counter, so missing items are caught before the guest notices rather than after.</li>
+      <li><strong>Review whether the colleagues seen elsewhere on the floor during the rush</strong> have a standing instruction to step in when the till queue builds, or whether that decision is currently left to individual judgement.</li>
+      <li><strong>Track wait times informally for two weeks after the change</strong> to confirm it has actually closed the gap, rather than assuming it has.</li>
+    </ul>
+    <div class="priority-meta-row">
+      <div class="priority-meta"><div class="lbl">Suggested Timeframe</div><div class="val">1–2 Weeks</div></div>
+      <div class="priority-meta"><div class="lbl">Likely Investment</div><div class="val">None, a rota change</div></div>
+    </div>
+  </div>
+  <div class="doc-footer"><span class="brand">WAM 5</span><span>Sample Report &nbsp;·&nbsp; Page 16 of 23</span></div>
+</div>
+
+<div class="page">
+  <div class="sample-badge">SAMPLE REPORT</div>
+  <div class="page-content" style="padding-top:18mm;">
+    <div class="priority-head"><span class="priority-num">04</span><span class="priority-title">Close the Loop on Party Bookings at Departure</span></div>
+    <div class="priority-sub">The Finding</div>
+    <div class="priority-body">The birthday was acknowledged warmly at the booking stage. A sash was given on arrival, the host led the birthday song with real enthusiasm, and a small gift was given to the celebrant separately from the other children's goodie bags. None of that warmth carried through to departure. No staff member referenced the occasion again on the way out, and the emotional thread built up over three weeks, from the original phone call through to the party itself, was simply left to fade rather than being closed properly. This is a sequencing problem rather than a training problem. The right instinct clearly exists in this team. It just has not been built into the moment that matters most, the last thing a parent experiences before they leave.</div>
+    <div class="priority-sub">THINK</div>
+    <ul class="priority-list">
+      <li><strong>Flag party bookings in the daily briefing,</strong> so any staff member working the floor that day knows there is an occasion to reference, not just the host who ran the session.</li>
+      <li><strong>Give whoever is near the exit during a party departure a single line to use,</strong> something as simple as asking whether the birthday child had a good day.</li>
+      <li><strong>Add a pre arrival reminder to the confirmation journey,</strong> including parking guidance, so the same attentiveness shown at booking is visible again just before the visit.</li>
+      <li><strong>Consider a small, low cost departure gesture for the parent specifically,</strong> separate from the celebrant gift, since the parent is usually the one who decides whether to book again.</li>
+    </ul>
+    <div class="priority-meta-row">
+      <div class="priority-meta"><div class="lbl">Suggested Timeframe</div><div class="val">1 Week</div></div>
+      <div class="priority-meta"><div class="lbl">Likely Investment</div><div class="val">None</div></div>
+    </div>
+  </div>
+  <div class="doc-footer"><span class="brand">WAM 5</span><span>Sample Report &nbsp;·&nbsp; Page 17 of 23</span></div>
+</div>
+
+<div class="page">
+  <div class="sample-badge">SAMPLE REPORT</div>
+  <div class="page-content" style="padding-top:18mm;">
+    <div class="priority-head"><span class="priority-num">05</span><span class="priority-title">Standardise the Proactive Welcome Across All Zones</span></div>
+    <div class="priority-sub">The Finding</div>
+    <div class="priority-body">Two of the three staff interactions tested during this visit were genuinely excellent. Staff at the entrance and in the soft play zone made real eye contact, smiled, and asked an open question rather than offering a scripted greeting. The third interaction, at the climbing zone, fell noticeably short, with the attendant absorbed in conversation with a colleague and offering only a brief nod. The standard guests deserve already exists inside this business. It was demonstrated twice during a single visit. The gap is not a question of training or capability. It is a question of consistency, and consistency is usually the easier problem to solve, because the solution already exists somewhere in the building.</div>
+    <div class="priority-sub">THINK</div>
+    <ul class="priority-list">
+      <li><strong>Use the entrance and soft play interactions as the internal benchmark</strong> in the next team briefing, showing the team what good already looks like rather than describing it abstractly.</li>
+      <li><strong>Introduce light touch peer spot checks between zones,</strong> so the standard is reinforced socially day to day rather than only during a formal review.</li>
+      <li><strong>Rotate staff across zones periodically,</strong> so the same person is not always assigned to the area regardless of how that zone happens to be performing.</li>
+      <li><strong>Revisit this specific finding on the next mystery shop visit,</strong> since consistency problems are exactly what a tracking programme is built to catch.</li>
+    </ul>
+    <div class="priority-meta-row">
+      <div class="priority-meta"><div class="lbl">Suggested Timeframe</div><div class="val">Immediate</div></div>
+      <div class="priority-meta"><div class="lbl">Likely Investment</div><div class="val">None</div></div>
+    </div>
+    <div class="closing-box">
+      <strong>This is what a genuine evaluation looks like.</strong> Ten touchpoints, from the first phone call to departure. Specific, evidenced findings, not vague impressions, converted into five clear, executable priorities, each with a reason and a clear way forward.
+    </div>
+  </div>
+  <div class="doc-footer"><span class="brand">WAM 5</span><span>Sample Report &nbsp;·&nbsp; Page 18 of 23</span></div>
+</div>
+
+<div class="page">
+  <div class="sample-badge">SAMPLE REPORT</div>
+  <div class="page-content" style="padding-top:18mm;">
+    <div class="section-eyebrow">Closing Assessment</div>
+    <div class="section-title">Customer Service Tracker</div>
+
+    <div class="tracker-q">
+      <div class="tracker-q-label">Did the overall experience represent good value for money?</div>
+      <div class="tracker-q-body">Yes, on balance. The party package itself is fairly priced for what's included, and the strong arrival and safety experience reinforces that. The two commercial misses identified in this report, no upsell on the booking call and none in the confirmation, mean the business is actually leaving value on the table for itself here, not overcharging the guest.</div>
+    </div>
+
+    <div class="tracker-q">
+      <div class="tracker-q-label">Likelihood to Recommend</div>
+      <div class="nps-row">
+        <div class="nps-score">7<span style="font-size:12pt;color:var(--grey);"> / 10</span></div>
+        <div class="nps-scale">
+          <div class="nps-dot filled"></div><div class="nps-dot filled"></div><div class="nps-dot filled"></div><div class="nps-dot filled"></div><div class="nps-dot filled"></div><div class="nps-dot filled"></div><div class="nps-dot filled"></div><div class="nps-dot"></div><div class="nps-dot"></div><div class="nps-dot"></div>
+        </div>
+      </div>
+      <div class="tracker-q-body">A strong 7, not higher. The booking process, safety standards and overall warmth of the team would have me recommending this without hesitation. The unmanaged queue at the two most popular attractions is the one experience that would make me pause before telling a friend with excitable young children to expect a smooth visit.</div>
+    </div>
+
+    <div class="tracker-q">
+      <div class="tracker-q-label">Staff Recognition</div>
+      <div class="tracker-q-body" style="margin-bottom:3mm;">Two individual contributions stood out enough during this visit to call out by name.</div>
+      <div class="staff-spotlight">
+        <div class="staff-spotlight-name">Priya <span class="staff-spotlight-role">(Party Host)</span></div>
+        <div class="staff-spotlight-note">Led the celebration with real enthusiasm from start to finish, including a birthday song that had every child joining in. Engaged the whole group on arrival, not just the parent who made the booking.</div>
+      </div>
+      <div class="staff-spotlight">
+        <div class="staff-spotlight-name">Entrance Host <span class="staff-spotlight-role">(Male, Security/Greeting Role, Name Not Captured)</span></div>
+        <div class="staff-spotlight-note">Gave a warm, unscripted welcome on arrival rather than a scripted line, setting a genuinely positive tone for the visit before a single ticket was purchased.</div>
+      </div>
+    </div>
+
+    <div class="tracker-q">
+      <div class="tracker-q-label">Additional Comments</div>
+      <div class="tracker-q-body">This was a genuinely enjoyable visit built on a strong foundation. The booking call set a warm tone that mostly carried through to arrival, and the team's safety standards are some of the best I've assessed recently. The gaps identified here are specific and fixable rather than systemic: a queue sign, a staffing reshuffle at the till, one extra line in a booking script. None of this requires a culture change. It requires focused execution on five things.</div>
+    </div>
+  </div>
+  <div class="doc-footer"><span class="brand">WAM 5</span><span>Sample Report &nbsp;·&nbsp; Page 19 of 23</span></div>
+</div>
+
+
+<div class="page" id="cat-a">
+  <div class="sample-badge">SAMPLE REPORT</div>
+  <div class="page-content" style="padding-top:14mm;">
+    <div style="display:flex;justify-content:space-between;align-items:center;">
+      <a href="#exec-summary" onclick="document.getElementById('cat-a').classList.remove('revealed')" style="font-size:7.5pt;color:var(--orange);text-decoration:none;font-weight:700;">&larr; Back to Executive Summary</a>
+      <button class="export-btn" style="position:static;padding:6px 16px;font-size:11px;" onclick="exportSinglePage('cat-a')">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="12" height="12" fill="white"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+        Export to PDF
+      </button>
+    </div>
+    <div class="tp-head" style="margin-top:2mm;margin-bottom:2.5mm;">
+      <div class="tp-num-title"><span class="tp-title" style="color:#e8650a;">Attitude: Full Breakdown</span></div>
+      <div class="tp-overall-score"><div class="val" style="color:#e8650a;">72.1%</div><div class="lbl">28 Criteria</div></div>
+    </div>
+    <div class="method-box" style="margin-bottom:2.5mm;padding:3mm 5mm;font-size:7.3pt;line-height:1.4;">Staff warmth, engagement, eye contact, recovery from a mistake or distraction. Every criterion below contributed to the Attitude score shown on page 2, regardless of which touchpoint it was observed in.</div>
+    <table class="crit-table appendix-crit-table">
+      <tr><th style="width:30%;">Touchpoint</th><th style="width:46%;">Criterion</th><th>Score</th></tr>
+      <tr><td style="font-size:6.8pt;color:var(--grey);">01 Reservation Call</td><td>Salutation</td><td class="crit-score" style="color:#2e8b57;">10/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">01 Reservation Call</td><td>Tone & manner</td><td class="crit-score" style="color:#2e8b57;">9/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">01 Reservation Call</td><td>Previous visit enquiry</td><td class="crit-score" style="color:#c0392b;">0/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">01 Reservation Call</td><td>Overall closure</td><td class="crit-score" style="color:#2e8b57;">10/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">03 Arrival & First Impressions</td><td>Entrance greeting</td><td class="crit-score" style="color:#2e8b57;">9/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">04 Welcome & Staff Engagement</td><td>Eye contact & verbal greeting</td><td class="crit-score" style="color:#2e8b57;">8/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">04 Welcome & Staff Engagement</td><td>Proactive offer of help</td><td class="crit-score" style="color:#d4a017;">6/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">04 Welcome & Staff Engagement</td><td>Staff appearance</td><td class="crit-score" style="color:#2e8b57;">8/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">04 Welcome & Staff Engagement</td><td>Consistency across zones</td><td class="crit-score" style="color:#d4a017;">7/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">04 Welcome & Staff Engagement</td><td>Engagement with children directly</td><td class="crit-score" style="color:#2e8b57;">8/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">04 Welcome & Staff Engagement</td><td>Recovery from distraction</td><td class="crit-score" style="color:#d4a017;">7/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">05 Party Room, Host & Celebration</td><td>Host arrival & introduction</td><td class="crit-score" style="color:#2e8b57;">9/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">05 Party Room, Host & Celebration</td><td>Host engagement with all children, not just celebrant</td><td class="crit-score" style="color:#d4a017;">6/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">05 Party Room, Host & Celebration</td><td>Host energy & enthusiasm throughout</td><td class="crit-score" style="color:#2e8b57;">9/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">05 Party Room, Host & Celebration</td><td>Handling of a conflict between children</td><td class="crit-score" style="color:#2e8b57;">8/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">05 Party Room, Host & Celebration</td><td>Celebrant acknowledgement (badge / sash / crown)</td><td class="crit-score" style="color:#2e8b57;">9/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">05 Party Room, Host & Celebration</td><td>Birthday song led by host</td><td class="crit-score" style="color:#2e8b57;">10/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">05 Party Room, Host & Celebration</td><td>Celebrant given a small gift or memento</td><td class="crit-score" style="color:#2e8b57;">8/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">05 Party Room, Host & Celebration</td><td>Celebrant photo opportunity offered</td><td class="crit-score" style="color:#d4a017;">7/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">07 Safety & Compliance</td><td>Active staff supervision</td><td class="crit-score" style="color:#2e8b57;">9/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">07 Safety & Compliance</td><td>Staff response to a height-restricted child</td><td class="crit-score" style="color:#2e8b57;">8/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">08 F&B Experience</td><td>Recovery from order error</td><td class="crit-score" style="color:#d4a017;">5/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">09 Queue Management & Signage</td><td>Dispute mediation</td><td class="crit-score" style="color:#c0392b;">2/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">09 Queue Management & Signage</td><td>Staff availability for directions</td><td class="crit-score" style="color:#d4a017;">5/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">10 Departure & Final Impressions</td><td>Staff presence near exit</td><td class="crit-score" style="color:#d4a017;">5/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">10 Departure & Final Impressions</td><td>Party-specific farewell</td><td class="crit-score" style="color:#c0392b;">4/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">10 Departure & Final Impressions</td><td>Belongings / lost property check</td><td class="crit-score" style="color:#2e8b57;">8/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">10 Departure & Final Impressions</td><td>Overall closing impression</td><td class="crit-score" style="color:#2e8b57;">8/10</td></tr>
+
+    </table>
+  </div>
+  <div class="doc-footer"><span class="brand">WAM 5</span><span>Page 20 of 23 &nbsp;·&nbsp; Category Appendix: Attitude</span></div>
+</div>
+
+<div class="page" id="cat-f">
+  <div class="sample-badge">SAMPLE REPORT</div>
+  <div class="page-content" style="padding-top:14mm;">
+    <div style="display:flex;justify-content:space-between;align-items:center;">
+      <a href="#exec-summary" onclick="document.getElementById('cat-f').classList.remove('revealed')" style="font-size:7.5pt;color:var(--orange);text-decoration:none;font-weight:700;">&larr; Back to Executive Summary</a>
+      <button class="export-btn" style="position:static;padding:6px 16px;font-size:11px;" onclick="exportSinglePage('cat-f')">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="12" height="12" fill="white"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+        Export to PDF
+      </button>
+    </div>
+    <div class="tp-head" style="margin-top:2mm;margin-bottom:2.5mm;">
+      <div class="tp-num-title"><span class="tp-title" style="color:#2980b9;">Facility: Full Breakdown</span></div>
+      <div class="tp-overall-score"><div class="val" style="color:#2980b9;">75.5%</div><div class="lbl">20 Criteria</div></div>
+    </div>
+    <div class="method-box" style="margin-bottom:2.5mm;padding:3mm 5mm;font-size:7.3pt;line-height:1.4;">Physical presentation, cleanliness, signage, equipment and safety infrastructure. Every criterion below contributed to the Facility score shown on page 2, regardless of which touchpoint it was observed in.</div>
+    <table class="crit-table appendix-crit-table">
+      <tr><th style="width:30%;">Touchpoint</th><th style="width:46%;">Criterion</th><th>Score</th></tr>
+      <tr><td style="font-size:6.8pt;color:var(--grey);">03 Arrival & First Impressions</td><td>Exterior & car park presentation</td><td class="crit-score" style="color:#2e8b57;">9/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">03 Arrival & First Impressions</td><td>Signage to main entrance</td><td class="crit-score" style="color:#2e8b57;">8/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">03 Arrival & First Impressions</td><td>Accessibility at entry</td><td class="crit-score" style="color:#2e8b57;">8/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">05 Party Room, Host & Celebration</td><td>Room size & capacity for party size</td><td class="crit-score" style="color:#2e8b57;">9/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">05 Party Room, Host & Celebration</td><td>Decorations, themed and age-appropriate</td><td class="crit-score" style="color:#2e8b57;">8/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">05 Party Room, Host & Celebration</td><td>Room cleanliness before group entry</td><td class="crit-score" style="color:#2e8b57;">9/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">05 Party Room, Host & Celebration</td><td>Food quality</td><td class="crit-score" style="color:#d4a017;">7/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">06 Cleanliness & Presentation</td><td>Main play areas & circulation</td><td class="crit-score" style="color:#2e8b57;">9/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">06 Cleanliness & Presentation</td><td>Restroom standard, 1st check</td><td class="crit-score" style="color:#2e8b57;">9/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">06 Cleanliness & Presentation</td><td>Restroom standard, 2nd check</td><td class="crit-score" style="color:#d4a017;">6/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">06 Cleanliness & Presentation</td><td>Equipment & soft play condition</td><td class="crit-score" style="color:#2e8b57;">8/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">06 Cleanliness & Presentation</td><td>General tidiness</td><td class="crit-score" style="color:#d4a017;">7/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">06 Cleanliness & Presentation</td><td>Bin capacity vs. footfall</td><td class="crit-score" style="color:#2e8b57;">8/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">07 Safety & Compliance</td><td>First aid & emergency signage</td><td class="crit-score" style="color:#2e8b57;">10/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">07 Safety & Compliance</td><td>Fire exit visibility</td><td class="crit-score" style="color:#2e8b57;">9/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">08 F&B Experience</td><td>Food quality & presentation</td><td class="crit-score" style="color:#d4a017;">6/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">08 F&B Experience</td><td>Seating availability at peak</td><td class="crit-score" style="color:#d4a017;">7/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">09 Queue Management & Signage</td><td>Wait-time indicators</td><td class="crit-score" style="color:#c0392b;">3/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">09 Queue Management & Signage</td><td>Directional signage between zones</td><td class="crit-score" style="color:#c0392b;">4/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">09 Queue Management & Signage</td><td>Wayfinding to restrooms specifically</td><td class="crit-score" style="color:#d4a017;">7/10</td></tr>
+
+    </table>
+  </div>
+  <div class="doc-footer"><span class="brand">WAM 5</span><span>Page 21 of 23 &nbsp;·&nbsp; Category Appendix: Facility</span></div>
+</div>
+
+<div class="page" id="cat-p">
+  <div class="sample-badge">SAMPLE REPORT</div>
+  <div class="page-content" style="padding-top:14mm;">
+    <div style="display:flex;justify-content:space-between;align-items:center;">
+      <a href="#exec-summary" onclick="document.getElementById('cat-p').classList.remove('revealed')" style="font-size:7.5pt;color:var(--orange);text-decoration:none;font-weight:700;">&larr; Back to Executive Summary</a>
+      <button class="export-btn" style="position:static;padding:6px 16px;font-size:11px;" onclick="exportSinglePage('cat-p')">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="12" height="12" fill="white"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+        Export to PDF
+      </button>
+    </div>
+    <div class="tp-head" style="margin-top:2mm;margin-bottom:2.5mm;">
+      <div class="tp-num-title"><span class="tp-title" style="color:#8e44ad;">Process: Full Breakdown</span></div>
+      <div class="tp-overall-score"><div class="val" style="color:#8e44ad;">76.7%</div><div class="lbl">33 Criteria</div></div>
+    </div>
+    <div class="method-box" style="margin-bottom:2.5mm;padding:3mm 5mm;font-size:7.3pt;line-height:1.4;">Speed, accuracy, systems, booking journey and compliance procedure. Every criterion below contributed to the Process score shown on page 2, regardless of which touchpoint it was observed in.</div>
+    <table class="crit-table appendix-crit-table">
+      <tr><th style="width:30%;">Touchpoint</th><th style="width:46%;">Criterion</th><th>Score</th></tr>
+      <tr><td style="font-size:6.8pt;color:var(--grey);">01 Reservation Call</td><td>Connection speed</td><td class="crit-score" style="color:#2e8b57;">10/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">01 Reservation Call</td><td>Established nature of enquiry</td><td class="crit-score" style="color:#2e8b57;">10/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">01 Reservation Call</td><td>Package options explained</td><td class="crit-score" style="color:#d4a017;">7/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">01 Reservation Call</td><td>Pricing quoted</td><td class="crit-score" style="color:#2e8b57;">10/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">01 Reservation Call</td><td>Availability check</td><td class="crit-score" style="color:#2e8b57;">10/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">01 Reservation Call</td><td>Dietary / allergy enquiry</td><td class="crit-score" style="color:#2e8b57;">10/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">01 Reservation Call</td><td>Deposit / payment explained</td><td class="crit-score" style="color:#2e8b57;">10/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">02 Booking Confirmation</td><td>Timing of confirmation</td><td class="crit-score" style="color:#2e8b57;">10/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">02 Booking Confirmation</td><td>Correct grammar & spelling</td><td class="crit-score" style="color:#2e8b57;">10/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">02 Booking Confirmation</td><td>Booking details accuracy</td><td class="crit-score" style="color:#2e8b57;">10/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">02 Booking Confirmation</td><td>Terms & conditions included</td><td class="crit-score" style="color:#2e8b57;">10/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">02 Booking Confirmation</td><td>Parking information</td><td class="crit-score" style="color:#c0392b;">0/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">02 Booking Confirmation</td><td>Arrival instructions</td><td class="crit-score" style="color:#2e8b57;">10/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">02 Booking Confirmation</td><td>Dress code / footwear policy</td><td class="crit-score" style="color:#2e8b57;">10/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">02 Booking Confirmation</td><td>Payment / deposit instructions</td><td class="crit-score" style="color:#2e8b57;">10/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">02 Booking Confirmation</td><td>Pre-arrival reminder promised</td><td class="crit-score" style="color:#c0392b;">0/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">03 Arrival & First Impressions</td><td>Ticketing speed</td><td class="crit-score" style="color:#d4a017;">7/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">03 Arrival & First Impressions</td><td>Second till opened at peak</td><td class="crit-score" style="color:#2e8b57;">9/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">03 Arrival & First Impressions</td><td>Welcome consistency with booking</td><td class="crit-score" style="color:#2e8b57;">8/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">05 Party Room, Host & Celebration</td><td>Table setup pre-prepared on arrival</td><td class="crit-score" style="color:#2e8b57;">8/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">05 Party Room, Host & Celebration</td><td>Games organised & age-appropriate</td><td class="crit-score" style="color:#2e8b57;">8/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">05 Party Room, Host & Celebration</td><td>Timing management against the schedule</td><td class="crit-score" style="color:#d4a017;">7/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">05 Party Room, Host & Celebration</td><td>Food served in the party room</td><td class="crit-score" style="color:#2e8b57;">9/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">05 Party Room, Host & Celebration</td><td>Package food options explained to parent</td><td class="crit-score" style="color:#2e8b57;">8/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">05 Party Room, Host & Celebration</td><td>Vegetarian / dietary option proactively offered</td><td class="crit-score" style="color:#c0392b;">4/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">05 Party Room, Host & Celebration</td><td>Food served on time</td><td class="crit-score" style="color:#d4a017;">7/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">07 Safety & Compliance</td><td>Height/age restriction enforcement</td><td class="crit-score" style="color:#2e8b57;">10/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">07 Safety & Compliance</td><td>Equipment safety checks visible</td><td class="crit-score" style="color:#2e8b57;">8/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">08 F&B Experience</td><td>Order wait time</td><td class="crit-score" style="color:#c0392b;">4/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">08 F&B Experience</td><td>Staffing during peak</td><td class="crit-score" style="color:#c0392b;">3/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">08 F&B Experience</td><td>Order accuracy</td><td class="crit-score" style="color:#d4a017;">5/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">09 Queue Management & Signage</td><td>Queue structure & order</td><td class="crit-score" style="color:#c0392b;">4/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">10 Departure & Final Impressions</td><td>Feedback mechanism visibility</td><td class="crit-score" style="color:#d4a017;">7/10</td></tr>
+
+    </table>
+  </div>
+  <div class="doc-footer"><span class="brand">WAM 5</span><span>Page 22 of 23 &nbsp;·&nbsp; Category Appendix: Process</span></div>
+</div>
+
+<div class="page" id="cat-s">
+  <div class="sample-badge">SAMPLE REPORT</div>
+  <div class="page-content" style="padding-top:14mm;">
+    <div style="display:flex;justify-content:space-between;align-items:center;">
+      <a href="#exec-summary" onclick="document.getElementById('cat-s').classList.remove('revealed')" style="font-size:7.5pt;color:var(--orange);text-decoration:none;font-weight:700;">&larr; Back to Executive Summary</a>
+      <button class="export-btn" style="position:static;padding:6px 16px;font-size:11px;" onclick="exportSinglePage('cat-s')">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="12" height="12" fill="white"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+        Export to PDF
+      </button>
+    </div>
+    <div class="tp-head" style="margin-top:2mm;margin-bottom:2.5mm;">
+      <div class="tp-num-title"><span class="tp-title" style="color:#16a085;">Sales: Full Breakdown</span></div>
+      <div class="tp-overall-score"><div class="val" style="color:#16a085;">14.3%</div><div class="lbl">7 Criteria</div></div>
+    </div>
+    <div class="method-box" style="margin-bottom:2.5mm;padding:3mm 5mm;font-size:7.3pt;line-height:1.4;">Upsell attempts and commercial opportunity actually taken. Every criterion below contributed to the Sales score shown on page 2, regardless of which touchpoint it was observed in.</div>
+    <table class="crit-table appendix-crit-table">
+      <tr><th style="width:30%;">Touchpoint</th><th style="width:46%;">Criterion</th><th>Score</th></tr>
+      <tr><td style="font-size:6.8pt;color:var(--grey);">01 Reservation Call</td><td>Upsell of add-ons</td><td class="crit-score" style="color:#c0392b;">0/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">02 Booking Confirmation</td><td>Upsell / promotion in confirmation</td><td class="crit-score" style="color:#c0392b;">0/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">05 Party Room, Host & Celebration</td><td>Repeat visit offer made to attending families</td><td class="crit-score" style="color:#c0392b;">0/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">05 Party Room, Host & Celebration</td><td>Future party package promoted to other parents</td><td class="crit-score" style="color:#c0392b;">0/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">05 Party Room, Host & Celebration</td><td>Take-home flyer or voucher given to each family</td><td class="crit-score" style="color:#c0392b;">2/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">05 Party Room, Host & Celebration</td><td>Contact details collected from other parents</td><td class="crit-score" style="color:#c0392b;">0/10</td></tr>
+<tr><td style="font-size:6.8pt;color:var(--grey);">10 Departure & Final Impressions</td><td>Retail kiosk experience</td><td class="crit-score" style="color:#2e8b57;">8/10</td></tr>
+
+    </table>
+  </div>
+  <div class="doc-footer"><span class="brand">WAM 5</span><span>Page 23 of 23 &nbsp;·&nbsp; Category Appendix: Sales</span></div>
+</div>
+
+</body>
+</html>
