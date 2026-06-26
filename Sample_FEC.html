@@ -112,6 +112,11 @@
   .closing-box { background: var(--off); border-left: 3px solid var(--orange); padding: 4mm 6mm; margin-top: 5mm; font-size: 7.8pt; color: var(--light); line-height: 1.5; }
   .closing-box strong { color: var(--dark); }
 
+  .play-tier { margin-top: 3mm; }
+  .play-tier-label { display: inline-flex; align-items: center; gap: 2mm; font-family: 'Barlow Condensed', sans-serif; font-size: 8pt; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; padding: 1mm 3mm; border-radius: 1mm; margin-bottom: 1.5mm; }
+  .play-tier-label.quick { background: #e8f5ee; color: #2e8b57; }
+  .play-tier-label.bigger { background: #fdeee3; color: var(--orange); }
+
   .category-badges { display: flex; gap: 3mm; margin-bottom: 3.5mm; flex-wrap: wrap; }
   .cat-badge { flex: 1; background: var(--off); border-top: 3px solid var(--orange); padding: 2.3mm 4mm; min-width: 38mm; }
   .cat-badge .cat-name { font-family: 'Barlow Condensed', sans-serif; font-size: 7.5pt; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--grey); }
@@ -648,22 +653,29 @@ function exportSinglePage(pageId) {
   <div class="sample-badge">SAMPLE REPORT</div>
   <div class="wam5-header-band">
     <div class="wam5-band-label">THE WAM &nbsp;<span>5</span></div>
-    <div class="wam5-band-sub">Five priorities, selected from ten assessed touchpoints, that will move the needle most. This is not a ranked order. Every priority below matters.</div>
+    <div class="wam5-band-sub">Five themes, selected from ten assessed touchpoints, that will move the needle most. Each one ranges from a fast, free fix to a genuine investment. This is not a ranked order. Every theme below matters.</div>
   </div>
-  <div class="page-content" style="padding-top:7mm;">
-    <div class="priority-head"><span class="priority-num">01</span><span class="priority-title">Build Commercial Conversations Into Every Stage of the Party Journey</span></div>
+  <div class="page-content" style="padding-top:6mm;">
+    <div class="priority-head"><span class="priority-num">01</span><span class="priority-title">Build a Commercial Engine Around Every Party Booking</span></div>
     <div class="priority-sub">The Finding</div>
-    <div class="priority-body">The same gap appears three separate times across the guest journey. There was no upsell attempt on the booking call. There was no upsell mention in the written confirmation that followed. And most strikingly, no repeat visit offer or party package promotion was made to any of the seven other families who sat in the party room for forty five minutes. Sales is the only category to score below 50% anywhere in this report, landing at 14.3%, while Attitude, Facility and Process all scored above 70%. This isn't a case of a few staff members missing a trick. It's a structural gap in how the booking and party journey has been designed. Nobody in the business has been given a moment, a line, or a prompt to make these conversations happen, so understandably, nobody does.</div>
+    <div class="priority-body">The same gap appears three separate times across the guest journey. There was no upsell attempt on the booking call. There was no upsell mention in the written confirmation that followed. And most strikingly, no repeat visit offer or party package promotion was made to any of the seven other families who sat in the party room for forty five minutes. Sales is the only category to score below 50% anywhere in this report, landing at 14.3%, while Attitude, Facility and Process all scored above 70%. This is not a few staff members missing a trick. It is a structural gap in how the booking and party journey has been designed.</div>
     <div class="priority-sub">THINK</div>
-    <ul class="priority-list">
-      <li><strong>Add one upsell line to the booking script and the confirmation template.</strong> A premium package or a single add on, offered once, with no pressure attached.</li>
-      <li><strong>Give the party host a single closing line</strong> to use with parents as they collect their children. A return visit offer and a take home flyer, handed individually rather than left on a side table.</li>
-      <li><strong>Capture contact details from at least the parents who ask questions</strong> during the party, so there is a list to follow up with afterwards.</li>
-      <li><strong>Treat this as one connected journey, not three separate moments.</strong> The same message, reinforced at the call, the confirmation and the party itself, will land far better than three disconnected attempts.</li>
-    </ul>
-    <div class="priority-meta-row">
-      <div class="priority-meta"><div class="lbl">Suggested Timeframe</div><div class="val">1–2 Weeks</div></div>
-      <div class="priority-meta"><div class="lbl">Likely Investment</div><div class="val">None</div></div>
+
+    <div class="play-tier">
+      <span class="play-tier-label quick">Quick Wins</span>
+      <ul class="priority-list">
+        <li><strong>Add one upsell line to the booking script and the confirmation template.</strong> A premium package or a single add on, offered once, with no pressure attached.</li>
+        <li><strong>Give the party host a single closing line</strong> to use with parents as they collect their children, a return visit offer and a take home flyer, handed individually rather than left on a side table.</li>
+        <li><strong>Capture contact details from at least the parents who ask questions</strong> during the party, so there is a list to follow up with afterwards.</li>
+      </ul>
+    </div>
+    <div class="play-tier">
+      <span class="play-tier-label bigger">Bigger Plays</span>
+      <ul class="priority-list">
+        <li><strong>Invest in proper booking and CRM software</strong> with built-in upsell prompts and automated follow-up sequences, rather than relying on staff remembering to ask.</li>
+        <li><strong>Create a dedicated party sales or events coordinator role,</strong> responsible for converting every booking enquiry into a fuller package and every party into a repeat visit.</li>
+        <li><strong>Redesign the party packages themselves</strong> so a richer package is the default presented option, with a simpler one available on request, rather than the simplest package being the default with extras bolted on.</li>
+      </ul>
     </div>
   </div>
   <div class="doc-footer"><span class="brand">WAM 5</span><span>Sample Report &nbsp;·&nbsp; Page 14 of 23</span></div>
@@ -672,19 +684,26 @@ function exportSinglePage(pageId) {
 <div class="page">
   <div class="sample-badge">SAMPLE REPORT</div>
   <div class="page-content" style="padding-top:18mm;">
-    <div class="priority-head"><span class="priority-num">02</span><span class="priority-title">Introduce Queue Management at the Two Busiest Attractions</span></div>
+    <div class="priority-head"><span class="priority-num">02</span><span class="priority-title">Build Real Queue Capacity at the Busiest Attractions</span></div>
     <div class="priority-sub">The Finding</div>
-    <div class="priority-body">This was the lowest scoring touchpoint in the entire evaluation at 4.2 out of 10. No wait time indicator was present at either the main slide or the trampoline zone, the two most popular attractions on site. This led directly to a dispute between two groups of children over whose turn it was next, and no staff member was present to mediate. The absence of a system here is not a small oversight. It is the single biggest reason the overall score sits below where the strong arrival, safety and party experience would otherwise put it. Guests do not experience a venue as a set of individual scores. They experience it as a single afternoon, and an unmanaged queue at the busiest point of that afternoon can undo a lot of good work elsewhere.</div>
+    <div class="priority-body">This was the lowest scoring touchpoint in the entire evaluation at 4.2 out of 10. No wait time indicator was present at either the main slide or the trampoline zone, the two most popular attractions on site. This led directly to a dispute between two groups of children over whose turn it was next, with no staff member present to mediate. Guests do not experience a venue as a set of individual scores. They experience it as a single afternoon, and an unmanaged queue at the busiest point of that afternoon can undo a lot of good work elsewhere.</div>
     <div class="priority-sub">THINK</div>
-    <ul class="priority-list">
-      <li><strong>Install a simple wait time sign</strong> at both attractions. Even a manually updated whiteboard estimate is a significant improvement over having nothing at all.</li>
-      <li><strong>Assign a queue host during identified peak windows,</strong> most likely weekend afternoons, to structure the line and step in before disputes start.</li>
-      <li><strong>Mark the queue path physically</strong> with stanchions or floor markings, so the line itself communicates order without staff needing to intervene constantly.</li>
-      <li><strong>Brief the team on what to do when a dispute starts,</strong> rather than relying on whoever happens to be nearby to notice and react.</li>
-    </ul>
-    <div class="priority-meta-row">
-      <div class="priority-meta"><div class="lbl">Suggested Timeframe</div><div class="val">2–3 Weeks</div></div>
-      <div class="priority-meta"><div class="lbl">Likely Investment</div><div class="val">Low</div></div>
+
+    <div class="play-tier">
+      <span class="play-tier-label quick">Quick Wins</span>
+      <ul class="priority-list">
+        <li><strong>Install a simple wait time sign</strong> at both attractions. Even a manually updated whiteboard estimate is a significant improvement over having nothing at all.</li>
+        <li><strong>Assign a queue host during identified peak windows,</strong> most likely weekend afternoons, to structure the line and step in before disputes start.</li>
+        <li><strong>Mark the queue path physically</strong> with stanchions or floor markings, so the line itself communicates order without staff needing to intervene constantly.</li>
+      </ul>
+    </div>
+    <div class="play-tier">
+      <span class="play-tier-label bigger">Bigger Plays</span>
+      <ul class="priority-list">
+        <li><strong>Invest in a proper queue management or virtual ticketing system</strong> for the two busiest attractions, giving guests a real time slot rather than a physical line to stand in.</li>
+        <li><strong>Permanently redesign the queue areas</strong> with proper stanchions, shade and signage, rather than treating queuing as an afterthought of the attraction itself.</li>
+        <li><strong>Install digital wait-time displays</strong> at both attractions, linked to actual throughput, rather than relying on manually updated estimates long-term.</li>
+      </ul>
     </div>
   </div>
   <div class="doc-footer"><span class="brand">WAM 5</span><span>Sample Report &nbsp;·&nbsp; Page 15 of 23</span></div>
@@ -693,19 +712,26 @@ function exportSinglePage(pageId) {
 <div class="page">
   <div class="sample-badge">SAMPLE REPORT</div>
   <div class="page-content" style="padding-top:18mm;">
-    <div class="priority-head"><span class="priority-num">03</span><span class="priority-title">Resource the Café for Peak Periods</span></div>
+    <div class="priority-head"><span class="priority-num">03</span><span class="priority-title">Build Real Café Capacity for Peak Periods</span></div>
     <div class="priority-sub">The Finding</div>
-    <div class="priority-body">An eleven minute wait and a missing item from a two item order both trace back to the same root cause. A single staff member was running the till and food preparation simultaneously, while two further colleagues remained visible elsewhere on the floor and were not redirected to support. This is a staffing allocation issue rather than a kitchen or menu problem, which is actually good news, because it means the fix does not require new equipment, new training, or a change to the menu. It requires a different decision about where people stand during the periods that are already known to be busy.</div>
+    <div class="priority-body">An eleven minute wait and a missing item from a two item order both trace back to the same root cause. A single staff member was running the till and food preparation simultaneously, while two further colleagues remained visible elsewhere on the floor and were not redirected to support. This is a staffing and workflow issue rather than a kitchen quality problem, which is genuinely good news, because the fix is about how peak periods are resourced, not about retraining the team or changing the menu.</div>
     <div class="priority-sub">THINK</div>
-    <ul class="priority-list">
-      <li><strong>Build a peak hours rota</strong> that moves a second staff member onto the till during the windows already known to be busiest, rather than treating café staffing as fixed throughout the day.</li>
-      <li><strong>Introduce a simple order check</strong> before trays leave the counter, so missing items are caught before the guest notices rather than after.</li>
-      <li><strong>Review whether the colleagues seen elsewhere on the floor during the rush</strong> have a standing instruction to step in when the till queue builds, or whether that decision is currently left to individual judgement.</li>
-      <li><strong>Track wait times informally for two weeks after the change</strong> to confirm it has actually closed the gap, rather than assuming it has.</li>
-    </ul>
-    <div class="priority-meta-row">
-      <div class="priority-meta"><div class="lbl">Suggested Timeframe</div><div class="val">1–2 Weeks</div></div>
-      <div class="priority-meta"><div class="lbl">Likely Investment</div><div class="val">None, a rota change</div></div>
+
+    <div class="play-tier">
+      <span class="play-tier-label quick">Quick Wins</span>
+      <ul class="priority-list">
+        <li><strong>Build a peak hours rota</strong> that moves a second staff member onto the till during the windows already known to be busiest.</li>
+        <li><strong>Introduce a simple order check</strong> before trays leave the counter, so missing items are caught before the guest notices rather than after.</li>
+        <li><strong>Give the colleagues seen elsewhere on the floor during the rush</strong> a standing instruction to step in when the till queue builds, rather than leaving that decision to individual judgement.</li>
+      </ul>
+    </div>
+    <div class="play-tier">
+      <span class="play-tier-label bigger">Bigger Plays</span>
+      <ul class="priority-list">
+        <li><strong>Invest in a second till and the permanent staffing to run it</strong> during known peak windows, rather than treating peak capacity as a rota patch.</li>
+        <li><strong>Review the kitchen workflow and equipment itself,</strong> to confirm whether prep bottlenecks are compounding the staffing issue, not just masking it.</li>
+        <li><strong>Introduce a simplified, faster-to-execute peak-hours menu,</strong> available only during the busiest windows, without reducing quality on the full menu at other times.</li>
+      </ul>
     </div>
   </div>
   <div class="doc-footer"><span class="brand">WAM 5</span><span>Sample Report &nbsp;·&nbsp; Page 16 of 23</span></div>
@@ -714,19 +740,26 @@ function exportSinglePage(pageId) {
 <div class="page">
   <div class="sample-badge">SAMPLE REPORT</div>
   <div class="page-content" style="padding-top:18mm;">
-    <div class="priority-head"><span class="priority-num">04</span><span class="priority-title">Close the Loop on Party Bookings at Departure</span></div>
+    <div class="priority-head"><span class="priority-num">04</span><span class="priority-title">Make Every Guest Relationship Outlast the Visit</span></div>
     <div class="priority-sub">The Finding</div>
-    <div class="priority-body">The birthday was acknowledged warmly at the booking stage. A sash was given on arrival, the host led the birthday song with real enthusiasm, and a small gift was given to the celebrant separately from the other children's goodie bags. None of that warmth carried through to departure. No staff member referenced the occasion again on the way out, and the emotional thread built up over three weeks, from the original phone call through to the party itself, was simply left to fade rather than being closed properly. This is a sequencing problem rather than a training problem. The right instinct clearly exists in this team. It just has not been built into the moment that matters most, the last thing a parent experiences before they leave.</div>
+    <div class="priority-body">The birthday was acknowledged warmly at the booking stage. A sash was given on arrival, the host led the birthday song with real enthusiasm, and a small gift was given to the celebrant separately from the other children's goodie bags. None of that warmth carried through to departure. No staff member referenced the occasion again on the way out, and the emotional thread built up over three weeks, from the original phone call through to the party itself, was simply left to fade rather than being closed properly.</div>
     <div class="priority-sub">THINK</div>
-    <ul class="priority-list">
-      <li><strong>Flag party bookings in the daily briefing,</strong> so any staff member working the floor that day knows there is an occasion to reference, not just the host who ran the session.</li>
-      <li><strong>Give whoever is near the exit during a party departure a single line to use,</strong> something as simple as asking whether the birthday child had a good day.</li>
-      <li><strong>Add a pre arrival reminder to the confirmation journey,</strong> including parking guidance, so the same attentiveness shown at booking is visible again just before the visit.</li>
-      <li><strong>Consider a small, low cost departure gesture for the parent specifically,</strong> separate from the celebrant gift, since the parent is usually the one who decides whether to book again.</li>
-    </ul>
-    <div class="priority-meta-row">
-      <div class="priority-meta"><div class="lbl">Suggested Timeframe</div><div class="val">1 Week</div></div>
-      <div class="priority-meta"><div class="lbl">Likely Investment</div><div class="val">None</div></div>
+
+    <div class="play-tier">
+      <span class="play-tier-label quick">Quick Wins</span>
+      <ul class="priority-list">
+        <li><strong>Flag party bookings in the daily briefing,</strong> so any staff member working the floor that day knows there is an occasion to reference.</li>
+        <li><strong>Give whoever is near the exit during a party departure a single line to use,</strong> something as simple as asking whether the birthday child had a good day.</li>
+        <li><strong>Add a pre arrival reminder to the confirmation journey,</strong> including parking guidance, so the same attentiveness shown at booking is visible again just before the visit.</li>
+      </ul>
+    </div>
+    <div class="play-tier">
+      <span class="play-tier-label bigger">Bigger Plays</span>
+      <ul class="priority-list">
+        <li><strong>Invest in a guest recognition or CRM system</strong> that tracks repeat families across visits, so a returning celebrant is genuinely remembered, not just logged.</li>
+        <li><strong>Build a structured post-visit follow-up sequence,</strong> email or SMS, with a specific return-visit incentive tied to the occasion just celebrated.</li>
+        <li><strong>Introduce a loyalty or membership programme</strong> with real, trackable rewards for repeat bookings, rather than relying on goodwill alone to bring families back.</li>
+      </ul>
     </div>
   </div>
   <div class="doc-footer"><span class="brand">WAM 5</span><span>Sample Report &nbsp;·&nbsp; Page 17 of 23</span></div>
@@ -735,26 +768,36 @@ function exportSinglePage(pageId) {
 <div class="page">
   <div class="sample-badge">SAMPLE REPORT</div>
   <div class="page-content" style="padding-top:18mm;">
-    <div class="priority-head"><span class="priority-num">05</span><span class="priority-title">Standardise the Proactive Welcome Across All Zones</span></div>
+    <div class="priority-head"><span class="priority-num">05</span><span class="priority-title">Make Every Staff Interaction Reflect the Brand Promise</span></div>
     <div class="priority-sub">The Finding</div>
-    <div class="priority-body">Two of the three staff interactions tested during this visit were genuinely excellent. Staff at the entrance and in the soft play zone made real eye contact, smiled, and asked an open question rather than offering a scripted greeting. The third interaction, at the climbing zone, fell noticeably short, with the attendant absorbed in conversation with a colleague and offering only a brief nod. The standard guests deserve already exists inside this business. It was demonstrated twice during a single visit. The gap is not a question of training or capability. It is a question of consistency, and consistency is usually the easier problem to solve, because the solution already exists somewhere in the building.</div>
+    <div class="priority-body">Two of the three staff interactions tested during this visit were genuinely excellent. Staff at the entrance and in the soft play zone made real eye contact, smiled, and asked an open question rather than offering a scripted greeting. The third interaction, at the climbing zone, fell noticeably short, with the attendant absorbed in conversation with a colleague. The standard guests deserve already exists inside this business. It was demonstrated twice during a single visit. The gap is a question of consistency, not capability.</div>
     <div class="priority-sub">THINK</div>
-    <ul class="priority-list">
-      <li><strong>Use the entrance and soft play interactions as the internal benchmark</strong> in the next team briefing, showing the team what good already looks like rather than describing it abstractly.</li>
-      <li><strong>Introduce light touch peer spot checks between zones,</strong> so the standard is reinforced socially day to day rather than only during a formal review.</li>
-      <li><strong>Rotate staff across zones periodically,</strong> so the same person is not always assigned to the area regardless of how that zone happens to be performing.</li>
-      <li><strong>Revisit this specific finding on the next mystery shop visit,</strong> since consistency problems are exactly what a tracking programme is built to catch.</li>
-    </ul>
-    <div class="priority-meta-row">
-      <div class="priority-meta"><div class="lbl">Suggested Timeframe</div><div class="val">Immediate</div></div>
-      <div class="priority-meta"><div class="lbl">Likely Investment</div><div class="val">None</div></div>
+
+    <div class="play-tier">
+      <span class="play-tier-label quick">Quick Wins</span>
+      <ul class="priority-list">
+        <li><strong>Use the entrance and soft play interactions as the internal benchmark</strong> in the next team briefing, showing the team what good already looks like.</li>
+        <li><strong>Introduce light touch peer spot checks between zones,</strong> so the standard is reinforced socially day to day, not only during a formal review.</li>
+        <li><strong>Rotate staff across zones periodically,</strong> so the same person is not always assigned to the area regardless of how that zone happens to be performing.</li>
+      </ul>
     </div>
+    <div class="play-tier">
+      <span class="play-tier-label bigger">Bigger Plays</span>
+      <ul class="priority-list">
+        <li><strong>Build a formal onboarding curriculum for new hires,</strong> so the standard does not depend on which specific staff member happens to be on shift.</li>
+        <li><strong>Introduce a shift-lead structure with clear accountability for standards,</strong> so consistency has a named owner during every shift, not just a hoped-for outcome.</li>
+        <li><strong>Run a structured, recurring internal mystery-shop programme,</strong> so consistency gaps like this one are caught between formal external reviews, not only during them.</li>
+      </ul>
+    </div>
+
     <div class="closing-box">
-      <strong>This is what a genuine evaluation looks like.</strong> Ten touchpoints, from the first phone call to departure. Specific, evidenced findings, not vague impressions, converted into five clear, executable priorities, each with a reason and a clear way forward.
+</WAMEOF
+echo "Built. $(wc -c < /home/claude/fec_wam5_v2.html) chars"      <strong>This is what a genuine evaluation looks like.</strong> Ten touchpoints, from the first phone call to departure. Specific, evidenced findings, not vague impressions, converted into five themes that each carry a fast fix and a real investment, not just one or the other.
     </div>
   </div>
   <div class="doc-footer"><span class="brand">WAM 5</span><span>Sample Report &nbsp;·&nbsp; Page 18 of 23</span></div>
 </div>
+
 
 <div class="page">
   <div class="sample-badge">SAMPLE REPORT</div>
