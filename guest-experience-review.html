@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WAM 5 Guest Experience & Commercial Review | WAM 5</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500;600&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --orange: #e8650a;
+    --black: #111111;
+    --dark: #1a1a1a;
+    --white: #ffffff;
+    --off: #f6f6f6;
+    --grey: #888888;
+    --light: #444444;
+    --maxw: 1100px;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Barlow', sans-serif;
+    background: var(--white);
+    color: var(--dark);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* every section shares this same centred width — this is what keeps the page symmetrical */
+  .inner { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+
+  /* ── BACK BAR ── */
+  .backbar { background: var(--black); }
+  .backbar .inner { display: flex; align-items: center; padding: 14px 24px; }
+  .backbar a {
+    font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase; color: #cccccc; text-decoration: none;
+  }
+  .backbar a:hover { color: var(--orange); }
+
+  /* ── HEADER ── */
+  .header-css {
+    width: 100%; padding: 56px 0 44px; background: #0d1117;
+    position: relative; overflow: hidden; text-align: center;
+  }
+  .header-diagonal {
+    position: absolute; right: -60px; bottom: -40px; width: 340px; height: 220px;
+    background: rgba(255,255,255,0.04); transform: rotate(-15deg); border-radius: 8px;
+  }
+  .header-diagonal-2 {
+    position: absolute; right: 60px; bottom: -60px; width: 240px; height: 220px;
+    background: rgba(255,255,255,0.03); transform: rotate(-15deg); border-radius: 8px;
+  }
+  .header-css .inner { position: relative; z-index: 2; max-width: 700px; }
+  .header-intro {
+    font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 600;
+    letter-spacing: 0.3em; color: var(--orange); margin-bottom: 10px;
+  }
+  .header-main {
+    font-family: 'Barlow Condensed', sans-serif; font-size: clamp(32px, 7vw, 54px);
+    font-weight: 900; color: var(--white); text-transform: uppercase;
+    letter-spacing: -0.01em; line-height: 1; margin-bottom: 14px;
+  }
+  .header-main span { color: var(--orange); }
+  .header-tag {
+    font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 600;
+    letter-spacing: 0.2em; color: #e0e0e0;
+  }
+
+  .orange-rule { width: 100%; height: 3px; background: var(--orange); display: block; }
+
+  /* ── INTRO ── */
+  .intro-band { background: var(--dark); padding: 48px 0; }
+  .intro-band .inner { display: flex; flex-wrap: wrap; gap: 32px; align-items: stretch; }
+  .intro-left { flex: 0 0 auto; }
+  .intro-eyebrow {
+    font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 700;
+    letter-spacing: 0.18em; color: var(--orange); text-transform: uppercase; margin-bottom: 10px;
+  }
+  .intro-title {
+    font-family: 'Barlow Condensed', sans-serif; font-size: clamp(30px, 6vw, 44px);
+    font-weight: 900; line-height: 0.95; color: var(--white); text-transform: uppercase;
+  }
+  .intro-title span { color: var(--orange); }
+  .intro-right {
+    flex: 1 1 360px; border-left: 2px solid var(--orange); padding-left: 30px;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .intro-right p { font-size: 16px; color: #e8e8e8; line-height: 1.7; font-weight: 300; }
+  .intro-right p strong { color: var(--white); font-weight: 600; }
+
+  .section-eyebrow {
+    font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 700;
+    letter-spacing: 0.18em; color: var(--orange); text-transform: uppercase; margin-bottom: 8px;
+  }
+  .section-title {
+    font-family: 'Barlow Condensed', sans-serif; font-size: 24px;
+    font-weight: 800; color: var(--dark); text-transform: uppercase; margin-bottom: 28px;
+  }
+
+  /* ── STAGES ── */
+  .stages-section { background: var(--off); padding: 56px 0; }
+  .stages-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .stage { background: var(--white); border-top: 3px solid var(--orange); padding: 28px 24px; position: relative; }
+  .stage-num {
+    font-family: 'Barlow Condensed', sans-serif; font-size: 64px; font-weight: 900;
+    color: var(--orange); line-height: 1; opacity: 0.1; position: absolute; top: 8px; right: 16px;
+  }
+  .stage-title {
+    font-family: 'Barlow Condensed', sans-serif; font-size: 24px; font-weight: 800;
+    color: var(--dark); text-transform: uppercase; line-height: 1.1; margin-bottom: 12px;
+    position: relative; z-index: 1;
+  }
+  .stage-body { font-size: 15px; color: var(--light); line-height: 1.6; position: relative; z-index: 1; }
+
+  /* ── WAM 5 BAND ── */
+  .wam-band { background: var(--dark); padding: 44px 0; }
+  .wam-band .inner { display: flex; flex-wrap: wrap; align-items: center; gap: 32px; }
+  .wam-label {
+    font-family: 'Barlow Condensed', sans-serif; font-size: clamp(40px, 7vw, 58px);
+    font-weight: 900; color: var(--white); letter-spacing: -0.02em;
+    text-transform: uppercase; white-space: nowrap; line-height: 1;
+  }
+  .wam-label span { color: var(--orange); }
+  .wam-divider { width: 2px; height: 60px; background: var(--orange); flex-shrink: 0; }
+  .wam-text { flex: 1 1 360px; font-size: 16px; color: #e8e8e8; font-weight: 300; line-height: 1.7; }
+  .wam-text strong { color: var(--white); font-weight: 600; }
+
+  /* ── DELIVERABLES ── */
+  .deliver-section { padding: 56px 0; background: var(--white); }
+  .deliver-grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: repeat(2, auto); grid-auto-flow: column; gap: 16px 48px; margin-top: 16px; }
+  .deliver-item { display: flex; align-items: flex-start; gap: 14px; font-size: 16px; color: var(--light); line-height: 1.55; }
+  .deliver-dot { width: 8px; height: 8px; background: var(--orange); border-radius: 50%; flex-shrink: 0; margin-top: 7px; }
+
+  /* ── WHO + EVALUATOR ── */
+  .bottom-section { background: var(--off); }
+  .bottom-section .inner { display: grid; grid-template-columns: 1fr 1fr; gap: 0; padding: 0; max-width: var(--maxw); }
+  .who-block { padding: 48px 32px 48px 24px; border-right: 1px solid #dddddd; }
+  .eval-block { padding: 48px 24px 48px 32px; }
+  .block-title {
+    font-family: 'Barlow Condensed', sans-serif; font-size: 24px; font-weight: 800;
+    color: var(--dark); text-transform: uppercase; margin-bottom: 10px; margin-top: 14px;
+  }
+  .block-body { font-size: 15px; color: var(--light); line-height: 1.6; }
+  .eval-name {
+    font-family: 'Barlow Condensed', sans-serif; font-size: 24px; font-weight: 800;
+    color: var(--dark); text-transform: uppercase; line-height: 1; margin-top: 14px;
+  }
+  .eval-sub { font-size: 14px; color: var(--orange); font-weight: 600; letter-spacing: 0.05em; margin-bottom: 12px; }
+
+  /* ── CTA BAND ── */
+  .cta-band { background: var(--orange); padding: 48px 0; text-align: center; }
+  .cta-title {
+    font-family: 'Barlow Condensed', sans-serif; font-size: clamp(24px, 4vw, 32px);
+    font-weight: 900; color: var(--white); text-transform: uppercase; margin-bottom: 14px;
+  }
+  .cta-sub { font-size: 16px; color: rgba(255,255,255,0.9); margin-bottom: 28px; font-weight: 300; }
+  .cta-btn {
+    display: inline-block; background: var(--white); color: var(--orange);
+    font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 14px;
+    letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; padding: 16px 36px;
+  }
+  .cta-btn:hover { background: #f0f0f0; }
+  .cta-link {
+    display: block; margin-top: 16px; font-size: 14px; color: rgba(255,255,255,0.9); text-decoration: underline;
+  }
+
+  /* ── FOOTER ── */
+  .footer { background: var(--dark); padding: 28px 0; }
+  .footer .inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px; }
+  .footer-item { display: flex; align-items: center; gap: 8px; font-size: 14px; color: #cccccc; }
+  .footer-item a { color: #cccccc; text-decoration: none; }
+  .footer-item a:hover { color: var(--orange); }
+  .footer-item svg { flex-shrink: 0; }
+
+  @media (max-width: 600px) {
+    .footer .inner { flex-direction: column; align-items: flex-start; gap: 14px; }
+  }
+
+  /* ── MOBILE ── */
+  @media (max-width: 800px) {
+    .stages-grid { grid-template-columns: 1fr; }
+    .deliver-grid { grid-template-columns: 1fr; }
+    .bottom-section .inner { grid-template-columns: 1fr; }
+    .who-block { border-right: none; border-bottom: 1px solid #dddddd; }
+    .wam-band .inner { flex-direction: column; text-align: center; }
+    .wam-divider { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="backbar">
+  <div class="inner">
+    <a href="https://what-actually-matters.com">&larr; Back to Main Website</a>
+  </div>
+</div>
+
+<div class="header-css">
+  <div class="header-diagonal"></div>
+  <div class="header-diagonal-2"></div>
+  <div class="inner">
+    <div class="header-intro">I N T R O D U C I N G</div>
+    <div class="header-main">WHAT <span>ACTUALLY</span> MATTERS</div>
+    <div class="header-tag">FOCUS &nbsp;·&nbsp; DISCIPLINE &nbsp;·&nbsp; EXECUTION</div>
+  </div>
+</div>
+<span class="orange-rule"></span>
+
+<div class="intro-band">
+  <div class="inner">
+    <div class="intro-left">
+      <div class="intro-eyebrow">The Service</div>
+      <div class="intro-title">Guest<br>Experience &<br><span>Commercial</span><br>Review</div>
+    </div>
+    <div class="intro-right">
+      <p>Most operators believe they know what their guests experience. They don't. They know what their teams tell them.<br><br>
+      <strong>The WAM 5 Review closes that gap.</strong> An honest, scored, independent evaluation of the guest journey from arrival to departure, against criteria that <span style="color:#e8650a;font-weight:600;">actually matters</span>. The truth about <span style="color:#e8650a;font-weight:600;">what actually happens</span> on a day-to-day basis, and what it's costing you commercially.</p>
+    </div>
+  </div>
+</div>
+
+<span class="orange-rule"></span>
+
+<div class="stages-section">
+  <div class="inner">
+    <div class="section-eyebrow">How It Works</div>
+    <div class="section-title">Three Stages. One Clear Outcome.</div>
+    <div class="stages-grid">
+      <div class="stage">
+        <div class="stage-num">01</div>
+        <div class="stage-title">The Independent Review</div>
+        <div class="stage-body">An unannounced assessment conducted through the eyes of a genuine guest. Every stage of the customer journey is evaluated, from first impressions and arrival through to service delivery, cleanliness, safety, commercial opportunities and departure. No preparation. No special treatment. Just the experience your guests receive every day.</div>
+      </div>
+      <div class="stage">
+        <div class="stage-num">02</div>
+        <div class="stage-title">The Scored Report</div>
+        <div class="stage-body">Performance scored against a defined set of criteria across every stage of the guest journey. Clear, honest, benchmarked. You will know exactly where you stand and precisely where the gaps are.</div>
+      </div>
+      <div class="stage">
+        <div class="stage-num">03</div>
+        <div class="stage-title">The WAM 5 Priorities</div>
+        <div class="stage-body">From the review, a WAM 5 is produced. The five opportunities with the greatest potential impact on guest experience, operational performance and revenue. Not every issue that could be addressed. Just the five priorities that matter the most, right now.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<span class="orange-rule"></span>
+
+<div class="wam-band">
+  <div class="inner">
+    <div class="wam-label">WAM &nbsp;<span>5</span></div>
+    <div class="wam-divider"></div>
+    <div class="wam-text">
+      <strong>What <span style="color:#e8650a;">Actually</span> Matters.</strong> The WAM 5 that comes from this evaluation is not a generic improvement plan. It is a deliberately prioritised set of five actions, specific to your operation, your guests and your commercial context, that will move the needle if <strong style="color:#ffffff;">executed</strong> with <strong style="color:#ffffff;">focus</strong> and <strong style="color:#ffffff;">discipline</strong>.
+    </div>
+  </div>
+</div>
+
+<span class="orange-rule"></span>
+
+<div class="deliver-section">
+  <div class="inner">
+    <div class="section-eyebrow">What You Receive</div>
+    <div class="deliver-grid">
+      <div class="deliver-item"><div class="deliver-dot"></div><span>Fully scored independent visit report against defined guest experience criteria</span></div>
+      <div class="deliver-item"><div class="deliver-dot"></div><span>Honest assessment of every touchpoint experienced — nothing softened or qualified</span></div>
+      <div class="deliver-item"><div class="deliver-dot"></div><span>A WAM 5 — five absolute priorities that will focus the business on driving overall experience improvement and growth</span></div>
+      <div class="deliver-item"><div class="deliver-dot"></div><span>Management walkthrough session to discuss findings and next steps</span></div>
+    </div>
+  </div>
+</div>
+
+<span class="orange-rule"></span>
+
+<div class="bottom-section">
+  <div class="inner">
+    <div class="who-block">
+      <div class="section-eyebrow">Who It's For</div>
+      <div class="block-title">Leisure, Attractions &amp; F&amp;B Operators</div>
+      <div class="block-body">Theme parks, family entertainment centres, visitor attractions, waterparks, golf clubs and F&amp;B outlets across the GCC and beyond. Whether you are preparing for a new season, recovering from a difficult period, or simply want an independent view of where you really stand — this gives you exactly that.</div>
+    </div>
+    <div class="eval-block">
+      <div class="section-eyebrow">The Evaluator</div>
+      <div class="eval-name">Mark Tucker</div>
+      <div class="eval-sub">Founder, WAM 5 &nbsp;·&nbsp; 27+ Years in Leisure, Hospitality &amp; Attractions</div>
+      <div class="block-body">Mark has spent 27 years on both sides of the guest experience equation — as the operator responsible for delivering it and as the senior leader accountable for the commercial outcomes it drives. Dubai Safari Park, Global Village, Magic Planet Family Entertainment Centres, Butlins Holiday Resorts and various other guest-led leisure businesses across the GCC and UK. He knows what good looks like, what average gets away with, and what poor costs you.</div>
+    </div>
+  </div>
+</div>
+
+<span class="orange-rule"></span>
+
+<div class="cta-band">
+  <div class="inner">
+    <div class="cta-title">Want to know what your guests really experience?</div>
+    <div class="cta-sub">Get in touch to discuss your specific needs.</div>
+    <a class="cta-btn" href="mailto:mark@what-actually-matters.com">Get In Touch</a>
+    <a class="cta-link" href="rate-card.html">View pricing &amp; the rate card &rarr;</a>
+    <div style="margin-top:14px; font-size:13px; color:rgba(255,255,255,0.8);">Need help turning findings into trained behaviour? Ask about On-Site Training Sessions.</div>
+  </div>
+</div>
+
+<div class="footer">
+  <div class="inner">
+    <div class="footer-item">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#e8650a" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 4 6 4 9s-1.5 6.5-4 9c-2.5-2.5-4-6-4-9s1.5-6.5 4-9z"/></svg>
+      <a href="https://what-actually-matters.com">www.what-actually-matters.com</a>
+    </div>
+    <div class="footer-item">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#e8650a" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M3 6l9 7 9-7"/></svg>
+      <a href="mailto:mark@what-actually-matters.com">mark@what-actually-matters.com</a>
+    </div>
+    <div class="footer-item">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="15" height="15" style="fill:#25D366;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      <a href="https://wa.me/971585881209">+971 58 588 1209</a>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
